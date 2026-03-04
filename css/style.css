@@ -1,0 +1,1287 @@
+/* ==========================================
+   ONE PIECE WEDDING THEME
+   ========================================== */
+
+:root {
+    --gold: #D4AF37;
+    --gold-light: #F4E4BC;
+    --red: #C41E3A;
+    --red-dark: #8B0000;
+    --purple: #8B008B;
+    --parchment: #F5E6D3;
+    --parchment-dark: #E6D2B5;
+    --ocean-blue: #006994;
+    --ocean-dark: #003B5C;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #F5E6D3 100%);
+    color: #2c3e50;
+    overflow-x: hidden;
+}
+
+/* ==========================================
+   LOADING SCREEN
+   ========================================== */
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--ocean-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.5s;
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--gold);
+}
+
+.loading-content i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.loading-content p {
+    font-size: 1.2rem;
+    font-family: 'Pirata One', cursive;
+    letter-spacing: 2px;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ==========================================
+   MUSIC BUTTON
+   ========================================== */
+
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--red-dark);
+    border: 3px solid var(--red);
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.music-btn:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.music-btn.playing {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* ==========================================
+   COVER - WANTED POSTER
+   ========================================== */
+
+.cover {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
+    padding: 2rem;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    transition: transform 1s ease-in-out, opacity 1s;
+}
+
+.cover.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.wanted-poster {
+    max-width: 500px;
+    width: 100%;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.poster-border {
+    background: var(--parchment);
+    border: 8px solid var(--gold);
+    padding: 2rem;
+    box-shadow: 
+        0 0 0 4px var(--red-dark),
+        0 20px 60px rgba(0,0,0,0.5),
+        inset 0 0 100px rgba(139, 69, 19, 0.1);
+    position: relative;
+}
+
+.poster-border::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid var(--red-dark);
+    pointer-events: none;
+}
+
+.poster-header {
+    text-align: center;
+    border-bottom: 3px solid var(--red-dark);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.poster-header h2 {
+    font-family: 'Pirata One', cursive;
+    font-size: 4rem;
+    color: var(--red-dark);
+    letter-spacing: 5px;
+    text-shadow: 2px 2px 0 var(--gold);
+}
+
+.poster-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: var(--red-dark);
+    letter-spacing: 3px;
+}
+
+.couple-wanted {
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.wanted-photo-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.wanted-photo {
+    width: 250px;
+    height: 300px;
+    border: 4px solid var(--red-dark);
+    background: #ddd;
+    overflow: hidden;
+    position: relative;
+}
+
+.wanted-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.3) contrast(1.1);
+}
+
+.wanted-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(139, 69, 19, 0.03) 2px,
+        rgba(139, 69, 19, 0.03) 4px
+    );
+    pointer-events: none;
+}
+
+.bounty-stamp {
+    position: absolute;
+    bottom: -15px;
+    right: -15px;
+    width: 60px;
+    height: 60px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    border: 3px solid var(--gold);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.wanted-name {
+    font-family: 'Pirata One', cursive;
+    font-size: 2.5rem;
+    color: var(--red-dark);
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 0 var(--gold);
+}
+
+.wanted-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #666;
+    font-style: italic;
+}
+
+.poster-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    border-top: 2px solid var(--red-dark);
+    padding-top: 1rem;
+}
+
+.dead-or-alive {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.5rem;
+    color: var(--red-dark);
+    letter-spacing: 3px;
+}
+
+.wedding-date {
+    font-size: 1.2rem;
+    color: #333;
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+.berry-symbol {
+    color: var(--gold);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.btn-buka {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--red);
+    color: white;
+    border: none;
+    font-family: 'Pirata One', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid var(--gold);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-buka::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-buka:hover::before {
+    left: 100%;
+}
+
+.btn-buka:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ==========================================
+   MAIN CONTENT
+   ========================================== */
+
+#main-content {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+#main-content.visible {
+    opacity: 1;
+}
+
+.hidden {
+    display: none;
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: 
+        linear-gradient(rgba(0,59,92,0.8), rgba(0,105,148,0.8)),
+        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.ocean-waves {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom/cover no-repeat;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+.straw-hat-icon {
+    font-size: 5rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    animation: tilt 3s ease-in-out infinite;
+    text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+@keyframes tilt {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+}
+
+.adventure-text {
+    font-family: 'Cinzel', serif;
+    color: var(--gold);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+}
+
+.hero h1 {
+    font-family: 'Pirata One', cursive;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 3px 3px 0 var(--red-dark);
+    margin-bottom: 1rem;
+}
+
+.hero-quote {
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.devil-fruit-decoration {
+    margin-top: 2rem;
+    font-size: 3rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* ==========================================
+   SECTIONS GENERAL
+   ========================================== */
+
+section {
+    padding: 5rem 2rem;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Pirata One', cursive;
+    font-size: 3rem;
+    text-align: center;
+    color: var(--red-dark);
+    margin-bottom: 3rem;
+    text-shadow: 2px 2px 0 var(--gold);
+}
+
+.section-title i {
+    color: var(--gold);
+    margin: 0 1rem;
+}
+
+/* ==========================================
+   COUPLE SECTION - WANTED POSTERS
+   ========================================== */
+
+.couple-section {
+    background: var(--parchment);
+    background-image: 
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px);
+}
+
+.wanted-posters-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.wanted-card {
+    flex: 1;
+    min-width: 300px;
+    max-width: 400px;
+}
+
+.wanted-paper {
+    background: var(--parchment);
+    border: 6px solid var(--gold);
+    padding: 1.5rem;
+    box-shadow: 
+        0 0 0 3px var(--red-dark),
+        0 15px 40px rgba(0,0,0,0.3),
+        inset 0 0 60px rgba(139, 69, 19, 0.1);
+    transform: rotate(-2deg);
+    transition: transform 0.3s;
+}
+
+.wanted-card:hover .wanted-paper {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.bride-card .wanted-paper {
+    transform: rotate(2deg);
+}
+
+.bride-card:hover .wanted-paper {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.wanted-header {
+    text-align: center;
+    border-bottom: 3px solid var(--red-dark);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.wanted-header h3 {
+    font-family: 'Pirata One', cursive;
+    font-size: 2.5rem;
+    color: var(--red-dark);
+    letter-spacing: 3px;
+}
+
+.wanted-image {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+.wanted-image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border: 3px solid var(--red-dark);
+    filter: sepia(0.2);
+}
+
+.bounty-tag {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    background: var(--gold);
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--red-dark);
+    font-family: 'Pirata One', cursive;
+    font-size: 1.2rem;
+    color: var(--red-dark);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.berry {
+    color: var(--red);
+    margin-right: 0.3rem;
+}
+
+.wanted-info {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.wanted-info h3 {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.8rem;
+    color: var(--red-dark);
+    margin-bottom: 0.3rem;
+}
+
+.alias {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 0.5rem;
+}
+
+.devil-fruit {
+    background: var(--red-dark);
+    color: var(--gold);
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.parents {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.dream {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ocean-blue);
+    border-top: 1px dashed #ccc;
+    padding-top: 0.5rem;
+}
+
+.wanted-footer {
+    text-align: center;
+    font-family: 'Pirata One', cursive;
+    color: var(--red-dark);
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    border-top: 2px solid var(--red-dark);
+    padding-top: 0.5rem;
+    margin-top: 1rem;
+}
+
+.heart-divider {
+    font-size: 4rem;
+    color: var(--red);
+    position: relative;
+    animation: pulse-heart 2s infinite;
+}
+
+.heart-divider .x-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Pirata One', cursive;
+    font-size: 2rem;
+    color: var(--gold);
+}
+
+@keyframes pulse-heart {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* ==========================================
+   EVENT SECTION
+   ========================================== */
+
+.event-section {
+    background: linear-gradient(180deg, var(--parchment) 0%, #fff 100%);
+}
+
+.treasure-map {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: 
+        linear-gradient(rgba(245,230,211,0.9), rgba(245,230,211,0.9)),
+        url('https://www.transparenttextures.com/patterns/aged-paper.png');
+    border: 5px solid var(--gold);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.treasure-map::before {
+    content: 'X';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Pirata One', cursive;
+    font-size: 3rem;
+    color: var(--red);
+    opacity: 0.3;
+}
+
+.map-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
+    align-items: center;
+}
+
+.location-card {
+    background: white;
+    border: 3px solid var(--red-dark);
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.location-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: -3rem auto 1rem;
+    border: 3px solid var(--red-dark);
+    font-size: 1.5rem;
+    color: var(--red-dark);
+}
+
+.location-card h3 {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.5rem;
+    color: var(--red-dark);
+    margin-bottom: 1rem;
+}
+
+.location-details {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.location-details p {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.location-details i {
+    color: var(--gold);
+    width: 20px;
+    margin-right: 0.5rem;
+}
+
+.btn-maps {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--ocean-blue);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid var(--gold);
+}
+
+.btn-maps:hover {
+    background: var(--ocean-dark);
+    transform: scale(1.05);
+}
+
+.x-divider {
+    font-family: 'Pirata One', cursive;
+    font-size: 4rem;
+    color: var(--red);
+    text-shadow: 2px 2px 0 var(--gold);
+}
+
+/* Countdown */
+.countdown-treasure {
+    text-align: center;
+    margin-top: 3rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    border-radius: 15px;
+    border: 4px solid var(--red-dark);
+}
+
+.countdown-treasure h3 {
+    font-family: 'Pirata One', cursive;
+    font-size: 1.8rem;
+    color: var(--red-dark);
+    margin-bottom: 1.5rem;
+}
+
+.countdown-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.time-box {
+    background: var(--red-dark);
+    color: var(--gold);
+    padding: 1rem;
+    border-radius: 10px;
+    min-width: 80px;
+    border: 3px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.time-box span {
+    display: block;
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: 'Pirata One', cursive;
+}
+
+.time-box label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================
+   GALLERY SECTION
+   ========================================== */
+
+.gallery-section {
+    background: var(--ocean-dark);
+    color: white;
+}
+
+.gallery-section .section-title {
+    color: var(--gold);
+    text-shadow: 2px 2px 0 var(--red-dark);
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 4px solid var(--gold);
+    cursor: pointer;
+    aspect-ratio: 1;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05) rotate(2deg);
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+/* ==========================================
+   GIFT SECTION
+   ========================================== */
+
+.gift-section {
+    background: var(--parchment);
+    text-align: center;
+}
+
+.gift-intro {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--red-dark);
+    margin-bottom: 2rem;
+    font-family: 'Cinzel', serif;
+}
+
+.treasure-chests {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.chest-card {
+    background: linear-gradient(145deg, #8B4513 0%, #A0522D 100%);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 5px solid var(--gold);
+    box-shadow: 
+        0 10px 30px rgba(0,0,0,0.3),
+        inset 0 0 20px rgba(0,0,0,0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.chest-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 10px;
+    background: var(--gold);
+}
+
+.chest-card.wide {
+    grid-column: span 2;
+}
+
+.chest-lid {
+    font-size: 3rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+.chest-card h3 {
+    font-family: 'Pirata One', cursive;
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.qris-box {
+    background: white;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.qris-box img {
+    max-width: 200px;
+    width: 100%;
+}
+
+.bank-accounts {
+    display: grid;
+    gap: 1rem;
+}
+
+.bank-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255,255,255,0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--gold);
+    transition: transform 0.3s;
+}
+
+.bank-item:hover {
+    transform: translateX(10px);
+    background: rgba(255,255,255,0.2);
+}
+
+.bank-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    background: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.bank-info {
+    flex: 1;
+    text-align: left;
+    color: white;
+}
+
+.bank-name {
+    font-weight: bold;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+}
+
+.account-number {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: white;
+    transition: color 0.3s;
+}
+
+.account-number:hover {
+    color: var(--gold);
+}
+
+.account-name {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ==========================================
+   RSVP SECTION
+   ========================================== */
+
+.rsvp-section {
+    background: linear-gradient(180deg, #fff 0%, var(--parchment) 100%);
+}
+
+.parchment {
+    max-width: 600px;
+    margin: 0 auto;
+    background: 
+        linear-gradient(rgba(245,230,211,0.95), rgba(245,230,211,0.95)),
+        url('https://www.transparenttextures.com/patterns/aged-paper.png');
+    border: 4px solid var(--gold);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+    position: relative;
+}
+
+.parchment::before,
+.parchment::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: var(--red-dark);
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+}
+
+.parchment::before {
+    top: 15px;
+    left: 15px;
+}
+
+.parchment::after {
+    top: 15px;
+    right: 15px;
+}
+
+.rsvp-text {
+    text-align: center;
+    font-style: italic;
+    color: var(--red-dark);
+    margin-bottom: 2rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+}
+
+.rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--red-dark);
+    font-weight: 600;
+}
+
+.form-group label i {
+    color: var(--gold);
+    margin-right: 0.5rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--gold);
+    border-radius: 10px;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+}
+
+.btn-submit {
+    padding: 1rem;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 3px solid var(--gold);
+    font-family: 'Pirata One', cursive;
+    letter-spacing: 1px;
+}
+
+.btn-submit:hover {
+    background: var(--red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ==========================================
+   FOOTER
+   ========================================== */
+
+.footer {
+    background: var(--ocean-dark);
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') top/cover no-repeat;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+}
+
+.straw-hat-logo {
+    font-size: 4rem;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.thanks {
+    font-family: 'Pirata One', cursive;
+    font-size: 2.5rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+}
+
+#footer-names {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.one-piece-quote {
+    font-style: italic;
+    color: var(--gold-light);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+}
+
+/* Watermark Footer */
+.watermark-designer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.watermark-designer p {
+    margin-bottom: 0.3rem;
+    color: rgba(255,255,255,0.9);
+}
+
+.watermark-designer strong {
+    color: var(--gold);
+}
+
+.watermark-designer a {
+    color: #25d366;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s;
+}
+
+.watermark-designer a:hover {
+    color: var(--gold);
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   FIXED WATERMARK
+   ========================================== */
+
+.fixed-watermark {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 999;
+    background: rgba(139, 69, 19, 0.95);
+    padding: 0.6rem 1rem;
+    border-radius: 25px;
+    border: 2px solid var(--gold);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s;
+}
+
+.fixed-watermark:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+.fixed-watermark a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.fixed-watermark i {
+    color: var(--gold);
+}
+
+/* ==========================================
+   LIGHTBOX
+   ========================================== */
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.95);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.lightbox.active {
+    display: flex;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90%;
+    border: 5px solid var(--gold);
+    border-radius: 10px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: var(--gold);
+    font-size: 3rem;
+    cursor: pointer;
+    font-family: 'Pirata One', cursive;
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 768px) {
+    .poster-header h2 {
+        font-size: 3rem;
+    }
+    
+    .wanted-name {
+        font-size: 2rem;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .map-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .x-divider {
+        display: none;
+    }
+    
+    .chest-card.wide {
+        grid-column: span 1;
+    }
+    
+    .wanted-posters-container {
+        flex-direction: column;
+    }
+    
+    .fixed-watermark {
+        bottom: 75px;
+        right: 10px;
+        padding: 0.5rem 0.8rem;
+    }
+    
+    .fixed-watermark a {
+        font-size: 0.75rem;
+    }
+}
+
+/* Utility */
+.hidden {
+    display: none !important;
+}

@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan - One Piece Theme</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <i class="fas fa-anchor fa-spin"></i>
+            <p>Loading Grand Line...</p>
+        </div>
+    </div>
+
+    <!-- Wanted Poster Overlay Effect -->
+    <div class="wanted-overlay"></div>
+
+    <!-- Music Control -->
+    <button id="music-toggle" class="music-btn">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop></audio>
+
+    <!-- ==========================================
+         COVER SECTION (WANTED POSTER STYLE)
+         ========================================== -->
+    <section id="cover" class="cover">
+        <div class="wanted-poster">
+            <div class="poster-border">
+                <div class="poster-header">
+                    <h2>WANTED</h2>
+                    <p class="poster-subtitle">THE WEDDING OF</p>
+                </div>
+                
+                <div class="couple-wanted">
+                    <div class="wanted-photo-container">
+                        <div class="wanted-photo" id="cover-photo">
+                            <img src="" alt="Couple" id="cover-img">
+                        </div>
+                        <div class="bounty-stamp">♥</div>
+                    </div>
+                    
+                    <h1 class="wanted-name" id="cover-names">Luffy & Hancock</h1>
+                    <p class="wanted-title" id="cover-alias">King & Queen of Pirates</p>
+                </div>
+
+                <div class="poster-footer">
+                    <p class="dead-or-alive">DEAD OR ALIVE</p>
+                    <p class="wedding-date" id="cover-date">22 Mei 2024</p>
+                    <p class="berry-symbol">♥ Beri Cinta Sejati ♥</p>
+                </div>
+
+                <button class="btn-buka" onclick="openInvitation()">
+                    <i class="fas fa-scroll"></i> BUKA UNDANGAN
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         MAIN CONTENT
+         ========================================== -->
+    <main id="main-content" class="hidden">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="ocean-waves"></div>
+            <div class="hero-content">
+                <div class="straw-hat-icon">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <p class="adventure-text">Petualangan Baru Dimulai</p>
+                <h1 id="hero-names">Monkey D. Luffy & Boa Hancock</h1>
+                <p class="hero-quote" id="hero-quote">"Aku akan menjadi Raja Bajak Laut... dan suamimu!"</p>
+                <div class="devil-fruit-decoration">
+                    <span class="fruit-icon">🍎</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Couple Section (Wanted Posters) -->
+        <section class="couple-section">
+            <h2 class="section-title">
+                <i class="fas fa-skull-crossbones"></i> 
+                Bounty Couple 
+                <i class="fas fa-skull-crossbones"></i>
+            </h2>
+            
+            <div class="wanted-posters-container">
+                <!-- Groom Wanted Poster -->
+                <div class="wanted-card groom-card">
+                    <div class="wanted-paper">
+                        <div class="wanted-header">
+                            <h3>WANTED</h3>
+                        </div>
+                        <div class="wanted-image">
+                            <img id="photo-pria" src="" alt="Groom">
+                            <div class="bounty-tag">
+                                <span class="berry">♥</span>
+                                <span id="bounty-pria">3.000.000.000</span>
+                            </div>
+                        </div>
+                        <div class="wanted-info">
+                            <h3 id="nama-pria">Monkey D. Luffy</h3>
+                            <p class="alias" id="alias-pria">"Mugiwara no Luffy"</p>
+                            <p class="devil-fruit" id="df-pria">🍎 Hito Hito no Mi</p>
+                            <p class="parents" id="ortu-pria">Putra dari Dragon & Dadan</p>
+                            <p class="dream" id="dream-pria">Menjadi Raja Bajak Laut</p>
+                        </div>
+                        <div class="wanted-footer">DEAD OR ALIVE</div>
+                    </div>
+                </div>
+
+                <!-- Heart Divider -->
+                <div class="heart-divider">
+                    <i class="fas fa-heart"></i>
+                    <span class="x-mark">X</span>
+                </div>
+
+                <!-- Bride Wanted Poster -->
+                <div class="wanted-card bride-card">
+                    <div class="wanted-paper">
+                        <div class="wanted-header">
+                            <h3>WANTED</h3>
+                        </div>
+                        <div class="wanted-image">
+                            <img id="photo-wanita" src="" alt="Bride">
+                            <div class="bounty-tag">
+                                <span class="berry">♥</span>
+                                <span id="bounty-wanita">1.659.000.000</span>
+                            </div>
+                        </div>
+                        <div class="wanted-info">
+                            <h3 id="nama-wanita">Boa Hancock</h3>
+                            <p class="alias" id="alias-wanita">"Pirate Empress"</p>
+                            <p class="devil-fruit" id="df-wanita">🍎 Mero Mero no Mi</p>
+                            <p class="parents" id="ortu-wanita">Putri dari Amazon Lily</p>
+                            <p class="dream" id="dream-wanita">Bersama Luffy-sama</p>
+                        </div>
+                        <div class="wanted-footer">DEAD OR ALIVE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Details -->
+        <section class="event-section">
+            <h2 class="section-title">
+                <i class="fas fa-map-marked-alt"></i> 
+                Lokasi Petualangan 
+                <i class="fas fa-map-marked-alt"></i>
+            </h2>
+            
+            <div class="treasure-map">
+                <div class="map-container">
+                    <!-- Akad -->
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Akad Nikah</h3>
+                        <div class="location-details">
+                            <p><i class="fas fa-calendar"></i> <span id="akad-date"></span></p>
+                            <p><i class="fas fa-clock"></i> <span id="akad-time"></span></p>
+                            <p><i class="fas fa-building"></i> <span id="akad-venue"></span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="akad-address"></span></p>
+                        </div>
+                        <a id="akad-maps" href="#" class="btn-maps" target="_blank">
+                            <i class="fas fa-compass"></i> Lihat Peta Harta Karun
+                        </a>
+                    </div>
+
+                    <!-- X Mark -->
+                    <div class="x-divider">X</div>
+
+                    <!-- Resepsi -->
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3>Resepsi</h3>
+                        <div class="location-details">
+                            <p><i class="fas fa-calendar"></i> <span id="resepsi-date"></span></p>
+                            <p><i class="fas fa-clock"></i> <span id="resepsi-time"></span></p>
+                            <p><i class="fas fa-building"></i> <span id="resepsi-venue"></span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="resepsi-address"></span></p>
+                        </div>
+                        <a id="resepsi-maps" href="#" class="btn-maps" target="_blank">
+                            <i class="fas fa-compass"></i> Lihat Peta Harta Karun
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-treasure">
+                <h3><i class="fas fa-hourglass-half"></i> Menuju Hari H</h3>
+                <div id="countdown" class="countdown-boxes">
+                    <div class="time-box">
+                        <span id="days">00</span>
+                        <label>Hari</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="hours">00</span>
+                        <label>Jam</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="minutes">00</span>
+                        <label>Menit</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="seconds">00</span>
+                        <label>Detik</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery-section">
+            <h2 class="section-title">
+                <i class="fas fa-images"></i> 
+                Galeri Petualangan 
+                <i class="fas fa-images"></i>
+            </h2>
+            
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Gallery items via JS -->
+            </div>
+        </section>
+
+        <!-- Gift Section -->
+        <section class="gift-section">
+            <h2 class="section-title">
+                <i class="fas fa-gift"></i> 
+                Harta Karun (Kado) 
+                <i class="fas fa-gift"></i>
+            </h2>
+            
+            <p class="gift-intro">
+                "Bajak Laut tidak pernah berbagi harta... kecuali untuk keluarga!"
+            </p>
+
+            <div class="treasure-chests">
+                <!-- QRIS -->
+                <div class="chest-card">
+                    <div class="chest-lid">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Scan QRIS</h3>
+                    <div class="qris-box">
+                        <img id="qris-image" src="" alt="QRIS">
+                    </div>
+                    <p>Scan untuk transfer</p>
+                </div>
+
+                <!-- Bank Transfer -->
+                <div class="chest-card wide">
+                    <div class="chest-lid">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Transfer Bank</h3>
+                    <div class="bank-accounts" id="bank-list">
+                        <!-- Banks via JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="rsvp-section">
+            <h2 class="section-title">
+                <i class="fas fa-scroll"></i> 
+                Konfirmasi Kehadiran 
+                <i class="fas fa-scroll"></i>
+            </h2>
+            
+            <div class="parchment">
+                <p class="rsvp-text">
+                    "Kru Straw Hat mengundangmu untuk bergabung dalam petualangan terbesar ini!"
+                </p>
+
+                <form id="rsvp-form" class="rsvp-form">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Nama Bajak Laut</label>
+                        <input type="text" id="guest-name" placeholder="Masukkan nama Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> Konfirmasi Kehadiran</label>
+                        <select id="attendance" required>
+                            <option value="">Pilih status...</option>
+                            <option value="Hadir">⚓ Akan Hadir (Saya siap berlayar!)</option>
+                            <option value="Tidak Hadir">🌊 Tidak Bisa Hadir (Saya terdampar!)</option>
+                            <option value="Masih Ragu">🗺️ Masih Ragu (Menunggu angin!)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> Jumlah Kru (Tamu)</label>
+                        <input type="number" id="guest-count" placeholder="Berapa orang?" min="1" max="10">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Pesan/Ucapan</label>
+                        <textarea id="guest-message" placeholder="Tulis pesan atau doa untuk kami..." rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fab fa-whatsapp"></i> Kirim via Den Den Mushi (WA)
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-waves"></div>
+            <div class="footer-content">
+                <div class="straw-hat-logo">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <p class="thanks">Terima Kasih, Nakama!</p>
+                <p id="footer-names">Luffy & Hancock</p>
+                <p class="one-piece-quote">"Akan ada seseorang yang membawa perdamaian... dan itu adalah kami!"</p>
+                
+                <!-- Watermark -->
+                <div class="watermark-designer" id="watermark-footer">
+                    <p>Design by <strong>Malik</strong></p>
+                    <a href="#" id="watermark-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> <span id="watermark-phone">085882618717</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Fixed Watermark -->
+    <div class="fixed-watermark" id="fixed-watermark">
+        <a href="#" target="_blank">
+            <i class="fas fa-palette"></i> Design by Malik
+        </a>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <!-- Scripts -->
+    <script src="config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

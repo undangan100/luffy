@@ -11,8 +11,1148 @@
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --wanted-paper: #f4e4c1;
+            --wanted-border: #8b4513;
+            --one-piece-red: #c41e3a;
+            --ocean-blue: #1e3a5f;
+            --gold: #ffd700;
+            --dark-bg: #1a1a2e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a5f 0%, #0f2027 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .loading-content i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: spin 2s linear infinite;
+        }
+
+        .loading-content p {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Music Button */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--one-piece-red);
+            border: 3px solid var(--gold);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Cover Section */
+        .cover {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1920') center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .wanted-poster {
+            background: var(--wanted-paper);
+            border: 8px solid var(--wanted-border);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8), inset 0 0 100px rgba(139,69,19,0.1);
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            position: relative;
+            transform: rotate(-2deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: rotate(-2deg) translateY(0); }
+            50% { transform: rotate(-1deg) translateY(-10px); }
+        }
+
+        .poster-border {
+            border: 3px solid var(--wanted-border);
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .poster-header h2 {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            color: #2c1810;
+            letter-spacing: 10px;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+        }
+
+        .poster-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+            color: #5c4033;
+            margin-top: -10px;
+        }
+
+        .couple-wanted {
+            margin: 30px 0;
+        }
+
+        .wanted-photo-container {
+            position: relative;
+            width: 250px;
+            height: 300px;
+            margin: 0 auto 20px;
+            border: 4px solid #2c1810;
+            background: #ddd;
+            overflow: hidden;
+        }
+
+        .wanted-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(30%) contrast(1.1);
+        }
+
+        .bounty-stamp {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background: var(--one-piece-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            transform: rotate(-15deg);
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .wanted-name {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: #2c1810;
+            margin: 10px 0;
+        }
+
+        .wanted-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #5c4033;
+            font-style: italic;
+        }
+
+        .poster-footer {
+            margin-top: 20px;
+            border-top: 2px solid var(--wanted-border);
+            padding-top: 15px;
+        }
+
+        .dead-or-alive {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #2c1810;
+            letter-spacing: 3px;
+        }
+
+        .wedding-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            color: var(--one-piece-red);
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .berry-symbol {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.2rem;
+            color: #5c4033;
+        }
+
+        .btn-buka {
+            margin-top: 25px;
+            padding: 15px 40px;
+            background: var(--one-piece-red);
+            color: white;
+            border: none;
+            font-family: 'Pirata One', cursive;
+            font-size: 1.3rem;
+            cursor: pointer;
+            border: 3px solid var(--gold);
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-buka:hover {
+            background: #a01729;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-buka i {
+            margin-right: 10px;
+        }
+
+        /* Main Content */
+        .hidden {
+            display: none;
+        }
+
+        main {
+            background: linear-gradient(to bottom, #87CEEB 0%, #1e3a5f 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .nav-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            padding: 10px 0;
+            border-top: 3px solid var(--gold);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .nav-item {
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            padding: 5px 10px;
+            transition: all 0.3s;
+            font-size: 0.7rem;
+        }
+
+        .nav-item i {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+            color: var(--gold);
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: var(--gold);
+            transform: translateY(-5px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920') center/cover fixed;
+            position: relative;
+            padding-bottom: 100px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 200px;
+            background: linear-gradient(to top, var(--dark-bg), transparent);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .straw-hat-icon {
+            font-size: 5rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            animation: swing 3s ease-in-out infinite;
+        }
+
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .adventure-text {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+
+        .hero h1 {
+            font-family: 'Pirata One', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+        }
+
+        .hero-quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            border-left: 4px solid var(--gold);
+            background: rgba(0,0,0,0.3);
+        }
+
+        .devil-fruit-decoration {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Couple Section */
+        .couple-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            margin: 40px auto;
+        }
+
+        .wanted-posters-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .wanted-card {
+            background: var(--wanted-paper);
+            border: 5px solid var(--wanted-border);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
+        }
+
+        .wanted-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .bride-card {
+            transform: rotate(1deg);
+        }
+
+        .bride-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .wanted-paper {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .wanted-header h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: #2c1810;
+            letter-spacing: 5px;
+            border-bottom: 2px solid var(--wanted-border);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .wanted-image {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            background: #ddd;
+            border: 3px solid #2c1810;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .wanted-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .bounty-tag {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--one-piece-red);
+            color: white;
+            padding: 5px 15px;
+            font-family: 'Pirata One', cursive;
+            font-size: 1.3rem;
+            border: 2px solid var(--gold);
+            white-space: nowrap;
+        }
+
+        .berry {
+            color: var(--gold);
+            margin-right: 5px;
+        }
+
+        .wanted-info h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #2c1810;
+            margin-bottom: 5px;
+        }
+
+        .alias {
+            font-style: italic;
+            color: #5c4033;
+            margin-bottom: 10px;
+        }
+
+        .devil-fruit {
+            background: #2c1810;
+            color: var(--gold);
+            padding: 5px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+
+        .parents {
+            font-size: 0.9rem;
+            color: #5c4033;
+            margin: 10px 0;
+        }
+
+        .dream {
+            font-weight: bold;
+            color: var(--one-piece-red);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .wanted-footer {
+            margin-top: 15px;
+            padding-top: 10px;
+            border-top: 2px solid var(--wanted-border);
+            font-family: 'Pirata One', cursive;
+            font-size: 1.2rem;
+            color: #2c1810;
+        }
+
+        .heart-divider {
+            text-align: center;
+            color: var(--one-piece-red);
+            font-size: 3rem;
+            position: relative;
+        }
+
+        .heart-divider i {
+            display: block;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .x-mark {
+            font-family: 'Pirata One', cursive;
+            color: var(--gold);
+            font-size: 2rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.5;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* Event Section */
+        .event-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+        }
+
+        .treasure-map {
+            background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), var(--wanted-paper);
+            border: 4px solid var(--wanted-border);
+            border-radius: 15px;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        .location-card {
+            background: rgba(255,255,255,0.9);
+            border: 3px solid var(--wanted-border);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .location-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--one-piece-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 1.5rem;
+            border: 3px solid var(--gold);
+        }
+
+        .location-card h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: #2c1810;
+            margin-bottom: 15px;
+        }
+
+        .location-details p {
+            margin: 10px 0;
+            color: #5c4033;
+            font-size: 0.95rem;
+        }
+
+        .location-details i {
+            color: var(--one-piece-red);
+            margin-right: 8px;
+            width: 20px;
+        }
+
+        .btn-maps {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: var(--ocean-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-maps:hover {
+            background: var(--gold);
+            color: var(--ocean-blue);
+        }
+
+        .x-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Pirata One', cursive;
+            font-size: 3rem;
+            color: var(--one-piece-red);
+            text-shadow: 2px 2px 0 var(--gold);
+            height: 100%;
+        }
+
+        /* Countdown */
+        .countdown-treasure {
+            margin-top: 40px;
+            text-align: center;
+            background: rgba(0,0,0,0.6);
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid var(--gold);
+        }
+
+        .countdown-treasure h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .countdown-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: var(--wanted-paper);
+            border: 3px solid var(--wanted-border);
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 80px;
+        }
+
+        .time-box span {
+            display: block;
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: #2c1810;
+        }
+
+        .time-box label {
+            font-size: 0.9rem;
+            color: #5c4033;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 4px solid var(--wanted-border);
+            cursor: pointer;
+            height: 300px;
+            background: #ddd;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        /* Gift Section */
+        .gift-section {
+            background: rgba(0,0,0,0.2);
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        .gift-intro {
+            font-style: italic;
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        .treasure-chests {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .chest-card {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            border: 4px solid var(--gold);
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .chest-card.wide {
+            grid-column: 1 / -1;
+        }
+
+        .chest-lid {
+            width: 80px;
+            height: 80px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--wanted-border);
+            border: 4px solid var(--wanted-border);
+        }
+
+        .chest-card h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .qris-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 250px;
+            margin: 0 auto;
+        }
+
+        .qris-box img {
+            width: 100%;
+            height: auto;
+        }
+
+        .bank-accounts {
+            display: grid;
+            gap: 15px;
+        }
+
+        .bank-item {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bank-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--ocean-blue);
+        }
+
+        .bank-info {
+            text-align: left;
+            color: white;
+        }
+
+        .bank-name {
+            font-weight: bold;
+            color: var(--gold);
+        }
+
+        .bank-number {
+            font-family: monospace;
+            font-size: 1.1rem;
+            margin: 5px 0;
+        }
+
+        .account-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* RSVP Section */
+        .rsvp-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+        }
+
+        .parchment {
+            background: url('https://www.transparenttextures.com/patterns/aged-paper.png'), var(--wanted-paper);
+            border: 4px solid var(--wanted-border);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            position: relative;
+        }
+
+        .parchment::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid rgba(139,69,19,0.3);
+            border-radius: 10px;
+            pointer-events: none;
+        }
+
+        .rsvp-text {
+            text-align: center;
+            font-style: italic;
+            color: #5c4033;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .rsvp-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Pirata One', cursive;
+            font-size: 1.2rem;
+            color: #2c1810;
+            margin-bottom: 8px;
+        }
+
+        .form-group label i {
+            color: var(--one-piece-red);
+            margin-right: 8px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--wanted-border);
+            border-radius: 8px;
+            background: rgba(255,255,255,0.8);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--one-piece-red);
+            box-shadow: 0 0 10px rgba(196,30,58,0.2);
+        }
+
+        .btn-submit {
+            padding: 15px 30px;
+            background: #25D366;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37,211,102,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(to top, #0f2027, #1a1a2e);
+            padding: 60px 20px 120px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%231e3a5f' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        .straw-hat-logo {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .thanks {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .footer-content p {
+            margin: 10px 0;
+        }
+
+        .one-piece-quote {
+            font-style: italic;
+            color: #aaa;
+            margin-top: 20px;
+            padding: 20px;
+            border-top: 1px solid rgba(255,215,0,0.3);
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .watermark-designer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+        }
+
+        .watermark-designer a {
+            color: #25D366;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 5px;
+        }
+
+        /* Fixed Watermark */
+        .fixed-watermark {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px 15px;
+            border-radius: 20px;
+            z-index: 998;
+            font-size: 0.8rem;
+        }
+
+        .fixed-watermark a {
+            color: var(--gold);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid var(--gold);
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .wanted-posters-container,
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+
+            .heart-divider,
+            .x-divider {
+                transform: rotate(90deg);
+                padding: 20px 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .treasure-chests {
+                grid-template-columns: 1fr;
+            }
+
+            .chest-card.wide {
+                grid-column: 1;
+            }
+
+            .nav-item span {
+                display: none;
+            }
+
+            .nav-item i {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -23,16 +1163,15 @@
         </div>
     </div>
 
-    <!-- Wanted Poster Overlay Effect -->
-    <div class="wanted-overlay"></div>
-
     <!-- Music Control -->
-    <button id="music-toggle" class="music-btn">
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
         <i class="fas fa-music"></i>
     </button>
 
     <!-- Audio -->
-    <audio id="bg-music" loop></audio>
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- ==========================================
          COVER SECTION (WANTED POSTER STYLE)
@@ -48,7 +1187,7 @@
                 <div class="couple-wanted">
                     <div class="wanted-photo-container">
                         <div class="wanted-photo" id="cover-photo">
-                            <img src="" alt="Couple" id="cover-img">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500" alt="Couple" id="cover-img">
                         </div>
                         <div class="bounty-stamp">♥</div>
                     </div>
@@ -70,36 +1209,35 @@
         </div>
     </section>
 
-
-        <!-- ==========================================
+    <!-- ==========================================
          MAIN CONTENT
          ========================================== -->
     <main id="main-content" class="hidden">
         
-        <!-- Navigation Menu (muncul setelah buka undangan) -->
+        <!-- Navigation Menu -->
         <nav class="nav-menu" id="nav-menu">
             <div class="nav-container">
-                <a href="#hero" class="nav-item active">
+                <a href="#hero" class="nav-item active" onclick="setActiveNav(this)">
                     <i class="fas fa-home"></i>
                     <span>Beranda</span>
                 </a>
-                <a href="#couple" class="nav-item">
+                <a href="#couple" class="nav-item" onclick="setActiveNav(this)">
                     <i class="fas fa-user-friends"></i>
                     <span>Mempelai</span>
                 </a>
-                <a href="#event" class="nav-item">
+                <a href="#event" class="nav-item" onclick="setActiveNav(this)">
                     <i class="fas fa-map-marker-alt"></i>
                     <span>Acara</span>
                 </a>
-                <a href="#gallery" class="nav-item">
+                <a href="#gallery" class="nav-item" onclick="setActiveNav(this)">
                     <i class="fas fa-images"></i>
                     <span>Galeri</span>
                 </a>
-                <a href="#gift" class="nav-item">
+                <a href="#gift" class="nav-item" onclick="setActiveNav(this)">
                     <i class="fas fa-gift"></i>
                     <span>Kado</span>
                 </a>
-                <a href="#rsvp" class="nav-item">
+                <a href="#rsvp" class="nav-item" onclick="setActiveNav(this)">
                     <i class="fas fa-scroll"></i>
                     <span>RSVP</span>
                 </a>
@@ -108,48 +1246,6 @@
 
         <!-- Hero Section -->
         <section id="hero" class="hero">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- Couple Section -->
-        <section id="couple" class="couple-section">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- Event Section -->
-        <section id="event" class="event-section">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- Gallery Section -->
-        <section id="gallery" class="gallery-section">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- Gift Section -->
-        <section id="gift" class="gift-section">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- RSVP Section -->
-        <section id="rsvp" class="rsvp-section">
-            <!-- ... content sama ... -->
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <!-- ... content sama ... -->
-        </footer>
-    </main>
-
-    <!-- ==========================================
-         MAIN CONTENT
-         ========================================== -->
-    <main id="main-content" class="hidden">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="ocean-waves"></div>
             <div class="hero-content">
                 <div class="straw-hat-icon">
                     <i class="fas fa-hat-cowboy"></i>
@@ -164,7 +1260,7 @@
         </section>
 
         <!-- Couple Section (Wanted Posters) -->
-        <section class="couple-section">
+        <section id="couple" class="couple-section">
             <h2 class="section-title">
                 <i class="fas fa-skull-crossbones"></i> 
                 Bounty Couple 
@@ -179,7 +1275,7 @@
                             <h3>WANTED</h3>
                         </div>
                         <div class="wanted-image">
-                            <img id="photo-pria" src="" alt="Groom">
+                            <img id="photo-pria" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400" alt="Groom">
                             <div class="bounty-tag">
                                 <span class="berry">♥</span>
                                 <span id="bounty-pria">3.000.000.000</span>
@@ -209,7 +1305,7 @@
                             <h3>WANTED</h3>
                         </div>
                         <div class="wanted-image">
-                            <img id="photo-wanita" src="" alt="Bride">
+                            <img id="photo-wanita" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Bride">
                             <div class="bounty-tag">
                                 <span class="berry">♥</span>
                                 <span id="bounty-wanita">1.659.000.000</span>
@@ -229,7 +1325,7 @@
         </section>
 
         <!-- Event Details -->
-        <section class="event-section">
+        <section id="event" class="event-section">
             <h2 class="section-title">
                 <i class="fas fa-map-marked-alt"></i> 
                 Lokasi Petualangan 
@@ -245,12 +1341,12 @@
                         </div>
                         <h3>Akad Nikah</h3>
                         <div class="location-details">
-                            <p><i class="fas fa-calendar"></i> <span id="akad-date"></span></p>
-                            <p><i class="fas fa-clock"></i> <span id="akad-time"></span></p>
-                            <p><i class="fas fa-building"></i> <span id="akad-venue"></span></p>
-                            <p><i class="fas fa-map-marker-alt"></i> <span id="akad-address"></span></p>
+                            <p><i class="fas fa-calendar"></i> <span id="akad-date">Sabtu, 22 Mei 2024</span></p>
+                            <p><i class="fas fa-clock"></i> <span id="akad-time">08:00 WIB</span></p>
+                            <p><i class="fas fa-building"></i> <span id="akad-venue">Masjid Al-Hikmah</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="akad-address">Jl. Grand Line No. 1001, Jakarta</span></p>
                         </div>
-                        <a id="akad-maps" href="#" class="btn-maps" target="_blank">
+                        <a id="akad-maps" href="https://maps.google.com" class="btn-maps" target="_blank">
                             <i class="fas fa-compass"></i> Lihat Peta Harta Karun
                         </a>
                     </div>
@@ -265,12 +1361,12 @@
                         </div>
                         <h3>Resepsi</h3>
                         <div class="location-details">
-                            <p><i class="fas fa-calendar"></i> <span id="resepsi-date"></span></p>
-                            <p><i class="fas fa-clock"></i> <span id="resepsi-time"></span></p>
-                            <p><i class="fas fa-building"></i> <span id="resepsi-venue"></span></p>
-                            <p><i class="fas fa-map-marker-alt"></i> <span id="resepsi-address"></span></p>
+                            <p><i class="fas fa-calendar"></i> <span id="resepsi-date">Sabtu, 22 Mei 2024</span></p>
+                            <p><i class="fas fa-clock"></i> <span id="resepsi-time">11:00 - 14:00 WIB</span></p>
+                            <p><i class="fas fa-building"></i> <span id="resepsi-venue">Thousand Sunny Hall</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="resepsi-address">Jl. New World No. 56, Jakarta</span></p>
                         </div>
-                        <a id="resepsi-maps" href="#" class="btn-maps" target="_blank">
+                        <a id="resepsi-maps" href="https://maps.google.com" class="btn-maps" target="_blank">
                             <i class="fas fa-compass"></i> Lihat Peta Harta Karun
                         </a>
                     </div>
@@ -302,7 +1398,7 @@
         </section>
 
         <!-- Gallery Section -->
-        <section class="gallery-section">
+        <section id="gallery" class="gallery-section">
             <h2 class="section-title">
                 <i class="fas fa-images"></i> 
                 Galeri Petualangan 
@@ -315,7 +1411,7 @@
         </section>
 
         <!-- Gift Section -->
-        <section class="gift-section">
+        <section id="gift" class="gift-section">
             <h2 class="section-title">
                 <i class="fas fa-gift"></i> 
                 Harta Karun (Kado) 
@@ -334,7 +1430,7 @@
                     </div>
                     <h3>Scan QRIS</h3>
                     <div class="qris-box">
-                        <img id="qris-image" src="" alt="QRIS">
+                        <img id="qris-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SampleQRIS" alt="QRIS">
                     </div>
                     <p>Scan untuk transfer</p>
                 </div>
@@ -346,14 +1442,33 @@
                     </div>
                     <h3>Transfer Bank</h3>
                     <div class="bank-accounts" id="bank-list">
-                        <!-- Banks via JS -->
+                        <div class="bank-item">
+                            <div class="bank-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="bank-info">
+                                <div class="bank-name">Bank BCA</div>
+                                <div class="bank-number">1234567890</div>
+                                <div class="account-name">a.n. Monkey D. Luffy</div>
+                            </div>
+                        </div>
+                        <div class="bank-item">
+                            <div class="bank-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="bank-info">
+                                <div class="bank-name">Bank Mandiri</div>
+                                <div class="bank-number">0987654321</div>
+                                <div class="account-name">a.n. Boa Hancock</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- RSVP Section -->
-        <section class="rsvp-section">
+        <section id="rsvp" class="rsvp-section">
             <h2 class="section-title">
                 <i class="fas fa-scroll"></i> 
                 Konfirmasi Kehadiran 
@@ -365,7 +1480,7 @@
                     "Kru Straw Hat mengundangmu untuk bergabung dalam petualangan terbesar ini!"
                 </p>
 
-                <form id="rsvp-form" class="rsvp-form">
+                <form id="rsvp-form" class="rsvp-form" onsubmit="submitRSVP(event)">
                     <div class="form-group">
                         <label><i class="fas fa-user"></i> Nama Bajak Laut</label>
                         <input type="text" id="guest-name" placeholder="Masukkan nama Anda" required>
@@ -383,7 +1498,7 @@
 
                     <div class="form-group">
                         <label><i class="fas fa-users"></i> Jumlah Kru (Tamu)</label>
-                        <input type="number" id="guest-count" placeholder="Berapa orang?" min="1" max="10">
+                        <input type="number" id="guest-count" placeholder="Berapa orang?" min="1" max="10" value="1">
                     </div>
 
                     <div class="form-group">
@@ -412,7 +1527,7 @@
                 <!-- Watermark -->
                 <div class="watermark-designer" id="watermark-footer">
                     <p>Design by <strong>Malik</strong></p>
-                    <a href="#" id="watermark-wa" target="_blank">
+                    <a href="https://wa.me/6285882618717" id="watermark-wa" target="_blank">
                         <i class="fab fa-whatsapp"></i> <span id="watermark-phone">085882618717</span>
                     </a>
                 </div>
@@ -422,7 +1537,7 @@
 
     <!-- Fixed Watermark -->
     <div class="fixed-watermark" id="fixed-watermark">
-        <a href="#" target="_blank">
+        <a href="https://wa.me/6285882618717" target="_blank">
             <i class="fas fa-palette"></i> Design by Malik
         </a>
     </div>
@@ -433,8 +1548,204 @@
         <img id="lightbox-img" src="" alt="Full size">
     </div>
 
-    <!-- Scripts -->
-    <script src="config.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+        // Configuration
+        const config = {
+            couple: {
+                coverPhoto: "https://images.unsplash.com/photo-1519741497674-611481863552?w=500",
+                groom: {
+                    photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
+                    name: "Monkey D. Luffy",
+                    alias: "Mugiwara no Luffy",
+                    bounty: "3.000.000.000",
+                    devilFruit: "Hito Hito no Mi",
+                    parents: "Putra dari Dragon & Dadan",
+                    dream: "Menjadi Raja Bajak Laut"
+                },
+                bride: {
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+                    name: "Boa Hancock",
+                    alias: "Pirate Empress",
+                    bounty: "1.659.000.000",
+                    devilFruit: "Mero Mero no Mi",
+                    parents: "Putri dari Amazon Lily",
+                    dream: "Bersama Luffy-sama"
+                }
+            },
+            event: {
+                akad: {
+                    date: "Sabtu, 22 Mei 2024",
+                    time: "08:00 WIB",
+                    venue: "Masjid Al-Hikmah",
+                    address: "Jl. Grand Line No. 1001, Jakarta",
+                    maps: "https://maps.google.com"
+                },
+                resepsi: {
+                    date: "Sabtu, 22 Mei 2024",
+                    time: "11:00 - 14:00 WIB",
+                    venue: "Thousand Sunny Hall",
+                    address: "Jl. New World No. 56, Jakarta",
+                    maps: "https://maps.google.com"
+                }
+            },
+            gallery: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?w=600",
+                "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600",
+                "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600",
+                "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600",
+                "https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=600",
+                "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600"
+            ],
+            weddingDate: "2024-05-22T08:00:00",
+            whatsapp: "6285882618717"
+        };
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading').style.display = 'none';
+                }, 500);
+            }, 2000);
+
+            initGallery();
+            startCountdown();
+        });
+
+        // Open Invitation
+        function openInvitation() {
+            document.getElementById('cover').style.display = 'none';
+            document.getElementById('main-content').classList.remove('hidden');
+            document.body.style.overflow = 'auto';
+            
+            // Auto play music
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            music.play().then(() => {
+                btn.classList.add('playing');
+            }).catch(e => console.log('Autoplay prevented'));
+        }
+
+        // Music Toggle
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            
+            if (music.paused) {
+                music.play();
+                btn.classList.add('playing');
+                btn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                music.pause();
+                btn.classList.remove('playing');
+                btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        }
+
+        // Navigation Active State
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Scroll Spy for Navigation
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'couple', 'event', 'gallery', 'gift', 'rsvp'];
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const top = element.offsetTop;
+                    const bottom = top + element.offsetHeight;
+                    
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        document.querySelectorAll('.nav-item').forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('href') === `#${section}`) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        // Gallery Initialization
+        function initGallery() {
+            const container = document.getElementById('gallery-container');
+            config.gallery.forEach((img, index) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${img}" alt="Gallery ${index + 1}" onclick="openLightbox('${img}')">
+                    <div class="gallery-overlay">
+                        <i class="fas fa-search-plus"></i>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Countdown
+        function startCountdown() {
+            const targetDate = new Date(config.weddingDate).getTime();
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance > 0) {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                }
+            }, 1000);
+        }
+
+        // RSVP Form Submit
+        function submitRSVP(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('guest-name').value;
+            const attendance = document.getElementById('attendance').value;
+            const count = document.getElementById('guest-count').value;
+            const message = document.getElementById('guest-message').value;
+            
+            const text = `*Konfirmasi Kehadiran Wedding One Piece*%0A%0A` +
+                        `*Nama:* ${name}%0A` +
+                        `*Kehadiran:* ${attendance}%0A` +
+                        `*Jumlah Tamu:* ${count} orang%0A` +
+                        `*Pesan:* ${message || '-'}`;
+            
+            window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
+        }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
 </body>
 </html>

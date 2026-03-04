@@ -1,1440 +1,2054 @@
-/* ==========================================
-   ONE PIECE WEDDING THEME
-   ========================================== */
-
-:root {
-    --gold: #D4AF37;
-    --gold-light: #F4E4BC;
-    --red: #C41E3A;
-    --red-dark: #8B0000;
-    --purple: #8B008B;
-    --parchment: #F5E6D3;
-    --parchment-dark: #E6D2B5;
-    --ocean-blue: #006994;
-    --ocean-dark: #003B5C;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #F5E6D3 100%);
-    color: #2c3e50;
-    overflow-x: hidden;
-}
-
-/* ==========================================
-   NAVIGATION MENU (Like Snow Theme)
-   ========================================== */
-
-.nav-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(180deg, rgba(139, 69, 19, 0.98) 0%, rgba(139, 69, 19, 0.95) 100%);
-    z-index: 999;
-    padding: 0.8rem 0;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    border-bottom: 3px solid var(--gold);
-    transform: translateY(-100%);
-    transition: transform 0.5s ease;
-}
-
-.nav-menu.visible {
-    transform: translateY(0);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0 1rem;
-    overflow-x: auto;
-    scrollbar-width: none;
-}
-
-.nav-container::-webkit-scrollbar {
-    display: none;
-}
-
-.nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.5rem 1rem;
-    color: var(--gold-light);
-    text-decoration: none;
-    border-radius: 10px;
-    transition: all 0.3s;
-    min-width: 60px;
-    position: relative;
-}
-
-.nav-item i {
-    font-size: 1.2rem;
-    transition: transform 0.3s;
-}
-
-.nav-item span {
-    font-size: 0.7rem;
-    font-weight: 500;
-    white-space: nowrap;
-}
-
-.nav-item:hover {
-    color: white;
-    background: rgba(212, 175, 55, 0.2);
-}
-
-.nav-item:hover i {
-    transform: translateY(-3px);
-}
-
-.nav-item.active {
-    color: var(--gold);
-    background: rgba(212, 175, 55, 0.3);
-}
-
-.nav-item.active::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 20px;
-    height: 3px;
-    background: var(--gold);
-    border-radius: 2px;
-}
-
-/* Mobile Navigation */
-@media (max-width: 768px) {
-    .nav-menu {
-        top: auto;
-        bottom: 0;
-        border-bottom: none;
-        border-top: 3px solid var(--gold);
-        transform: translateY(100%);
-    }
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan - One Piece Theme</title>
     
-    .nav-menu.visible {
-        transform: translateY(0);
-    }
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Poppins:wght@300;400;600;700&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     
-    .nav-container {
-        justify-content: space-around;
-        gap: 0.3rem;
-    }
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .nav-item {
-        padding: 0.4rem 0.6rem;
-        min-width: 50px;
-    }
-    
-    .nav-item i {
-        font-size: 1.1rem;
-    }
-    
-    .nav-item span {
-        font-size: 0.6rem;
-    }
-    
-    /* Add padding bottom to sections for mobile nav */
-    section {
-        padding-bottom: 6rem;
-    }
-    
-    /* Fixed watermark adjust for mobile nav */
-    .fixed-watermark {
-        bottom: 90px;
-    }
-    
-    .music-btn {
-        bottom: 90px;
-    }
-}
-
-/* Scroll behavior */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Active section highlight */
-section {
-    scroll-margin-top: 80px;
-}
-
-@media (max-width: 768px) {
-    section {
-        scroll-margin-top: 20px;
-        scroll-margin-bottom: 80px;
-    }
-}
-
-/* ==========================================
-   LOADING SCREEN
-   ========================================== */
-
-.loading-screen {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--ocean-dark);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    transition: opacity 0.5s;
-}
-
-.loading-content {
-    text-align: center;
-    color: var(--gold);
-}
-
-.loading-content i {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.loading-content p {
-    font-size: 1.2rem;
-    font-family: 'Pirata One', cursive;
-    letter-spacing: 2px;
-}
-
-.loading-screen.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* ==========================================
-   MUSIC BUTTON
-   ========================================== */
-
-.music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--gold);
-    color: var(--red-dark);
-    border: 3px solid var(--red);
-    cursor: pointer;
-    z-index: 1000;
-    font-size: 1.2rem;
-    transition: all 0.3s;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
-
-.music-btn:hover {
-    transform: scale(1.1) rotate(15deg);
-}
-
-.music-btn.playing {
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* ==========================================
-   COVER - WANTED POSTER
-   ========================================== */
-
-.cover {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: 
-        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
-    padding: 2rem;
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    transition: transform 1s ease-in-out, opacity 1s;
-}
-
-.cover.hidden {
-    transform: translateY(-100%);
-    opacity: 0;
-    pointer-events: none;
-}
-
-.wanted-poster {
-    max-width: 500px;
-    width: 100%;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-}
-
-.poster-border {
-    background: var(--parchment);
-    border: 8px solid var(--gold);
-    padding: 2rem;
-    box-shadow: 
-        0 0 0 4px var(--red-dark),
-        0 20px 60px rgba(0,0,0,0.5),
-        inset 0 0 100px rgba(139, 69, 19, 0.1);
-    position: relative;
-}
-
-.poster-border::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
-    border: 2px solid var(--red-dark);
-    pointer-events: none;
-}
-
-.poster-header {
-    text-align: center;
-    border-bottom: 3px solid var(--red-dark);
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.poster-header h2 {
-    font-family: 'Pirata One', cursive;
-    font-size: 4rem;
-    color: var(--red-dark);
-    letter-spacing: 5px;
-    text-shadow: 2px 2px 0 var(--gold);
-}
-
-.poster-subtitle {
-    font-family: 'Cinzel', serif;
-    font-size: 0.9rem;
-    color: var(--red-dark);
-    letter-spacing: 3px;
-}
-
-.couple-wanted {
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.wanted-photo-container {
-    position: relative;
-    display: inline-block;
-    margin-bottom: 1.5rem;
-}
-
-.wanted-photo {
-    width: 250px;
-    height: 300px;
-    border: 4px solid var(--red-dark);
-    background: #ddd;
-    overflow: hidden;
-    position: relative;
-}
-
-.wanted-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: sepia(0.3) contrast(1.1);
-}
-
-.wanted-photo::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(139, 69, 19, 0.03) 2px,
-        rgba(139, 69, 19, 0.03) 4px
-    );
-    pointer-events: none;
-}
-
-.bounty-stamp {
-    position: absolute;
-    bottom: -15px;
-    right: -15px;
-    width: 60px;
-    height: 60px;
-    background: var(--red);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    border: 3px solid var(--gold);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    animation: heartbeat 1.5s ease-in-out infinite;
-}
-
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.wanted-name {
-    font-family: 'Pirata One', cursive;
-    font-size: 2.5rem;
-    color: var(--red-dark);
-    margin-bottom: 0.5rem;
-    text-shadow: 1px 1px 0 var(--gold);
-}
-
-.wanted-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1rem;
-    color: #666;
-    font-style: italic;
-}
-
-.poster-footer {
-    text-align: center;
-    margin-top: 1.5rem;
-    border-top: 2px solid var(--red-dark);
-    padding-top: 1rem;
-}
-
-.dead-or-alive {
-    font-family: 'Pirata One', cursive;
-    font-size: 1.5rem;
-    color: var(--red-dark);
-    letter-spacing: 3px;
-}
-
-.wedding-date {
-    font-size: 1.2rem;
-    color: #333;
-    margin: 0.5rem 0;
-    font-weight: 600;
-}
-
-.berry-symbol {
-    color: var(--gold);
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.btn-buka {
-    width: 100%;
-    margin-top: 1.5rem;
-    padding: 1rem;
-    background: var(--red);
-    color: white;
-    border: none;
-    font-family: 'Pirata One', cursive;
-    font-size: 1.3rem;
-    letter-spacing: 2px;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 3px solid var(--gold);
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-buka::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s;
-}
-
-.btn-buka:hover::before {
-    left: 100%;
-}
-
-.btn-buka:hover {
-    background: var(--red-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-/* ==========================================
-   MAIN CONTENT
-   ========================================== */
-
-#main-content {
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-#main-content.visible {
-    opacity: 1;
-}
-
-.hidden {
-    display: none;
-}
-
-/* ==========================================
-   HERO SECTION
-   ========================================== */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    background: 
-        linear-gradient(rgba(0,59,92,0.8), rgba(0,105,148,0.8)),
-        url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
-    position: relative;
-    overflow: hidden;
-}
-
-.ocean-waves {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom/cover no-repeat;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    padding: 2rem;
-}
-
-.straw-hat-icon {
-    font-size: 5rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    animation: tilt 3s ease-in-out infinite;
-    text-shadow: 0 5px 20px rgba(0,0,0,0.3);
-}
-
-@keyframes tilt {
-    0%, 100% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-}
-
-.adventure-text {
-    font-family: 'Cinzel', serif;
-    color: var(--gold);
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-    margin-bottom: 1rem;
-}
-
-.hero h1 {
-    font-family: 'Pirata One', cursive;
-    font-size: 4rem;
-    color: white;
-    text-shadow: 3px 3px 0 var(--red-dark);
-    margin-bottom: 1rem;
-}
-
-.hero-quote {
-    font-style: italic;
-    color: var(--gold-light);
-    font-size: 1.2rem;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.devil-fruit-decoration {
-    margin-top: 2rem;
-    font-size: 3rem;
-    animation: bounce 2s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-}
-
-/* ==========================================
-   SECTIONS GENERAL
-   ========================================== */
-
-section {
-    padding: 5rem 2rem;
-    position: relative;
-}
-
-.section-title {
-    font-family: 'Pirata One', cursive;
-    font-size: 3rem;
-    text-align: center;
-    color: var(--red-dark);
-    margin-bottom: 3rem;
-    text-shadow: 2px 2px 0 var(--gold);
-}
-
-.section-title i {
-    color: var(--gold);
-    margin: 0 1rem;
-}
-
-/* ==========================================
-   COUPLE SECTION - WANTED POSTERS
-   ========================================== */
-
-.couple-section {
-    background: var(--parchment);
-    background-image: 
-        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px),
-        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px);
-}
-
-.wanted-posters-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.wanted-card {
-    flex: 1;
-    min-width: 300px;
-    max-width: 400px;
-}
-
-.wanted-paper {
-    background: var(--parchment);
-    border: 6px solid var(--gold);
-    padding: 1.5rem;
-    box-shadow: 
-        0 0 0 3px var(--red-dark),
-        0 15px 40px rgba(0,0,0,0.3),
-        inset 0 0 60px rgba(139, 69, 19, 0.1);
-    transform: rotate(-2deg);
-    transition: transform 0.3s;
-}
-
-.wanted-card:hover .wanted-paper {
-    transform: rotate(0deg) scale(1.02);
-}
-
-.bride-card .wanted-paper {
-    transform: rotate(2deg);
-}
-
-.bride-card:hover .wanted-paper {
-    transform: rotate(0deg) scale(1.02);
-}
-
-.wanted-header {
-    text-align: center;
-    border-bottom: 3px solid var(--red-dark);
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.wanted-header h3 {
-    font-family: 'Pirata One', cursive;
-    font-size: 2.5rem;
-    color: var(--red-dark);
-    letter-spacing: 3px;
-}
-
-.wanted-image {
-    position: relative;
-    margin-bottom: 1rem;
-}
-
-.wanted-image img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border: 3px solid var(--red-dark);
-    filter: sepia(0.2);
-}
-
-.bounty-tag {
-    position: absolute;
-    bottom: -10px;
-    right: -10px;
-    background: var(--gold);
-    padding: 0.5rem 1rem;
-    border: 2px solid var(--red-dark);
-    font-family: 'Pirata One', cursive;
-    font-size: 1.2rem;
-    color: var(--red-dark);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.berry {
-    color: var(--red);
-    margin-right: 0.3rem;
-}
-
-.wanted-info {
-    text-align: center;
-    padding: 1rem 0;
-}
-
-.wanted-info h3 {
-    font-family: 'Pirata One', cursive;
-    font-size: 1.8rem;
-    color: var(--red-dark);
-    margin-bottom: 0.3rem;
-}
-
-.alias {
-    font-style: italic;
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-.devil-fruit {
-    background: var(--red-dark);
-    color: var(--gold);
-    display: inline-block;
-    padding: 0.3rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-}
-
-.parents {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 0.5rem;
-}
-
-.dream {
-    font-size: 0.85rem;
-    font-style: italic;
-    color: var(--ocean-blue);
-    border-top: 1px dashed #ccc;
-    padding-top: 0.5rem;
-}
-
-.wanted-footer {
-    text-align: center;
-    font-family: 'Pirata One', cursive;
-    color: var(--red-dark);
-    font-size: 1.2rem;
-    letter-spacing: 2px;
-    border-top: 2px solid var(--red-dark);
-    padding-top: 0.5rem;
-    margin-top: 1rem;
-}
-
-.heart-divider {
-    font-size: 4rem;
-    color: var(--red);
-    position: relative;
-    animation: pulse-heart 2s infinite;
-}
-
-.heart-divider .x-mark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: 'Pirata One', cursive;
-    font-size: 2rem;
-    color: var(--gold);
-}
-
-@keyframes pulse-heart {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-}
-
-/* ==========================================
-   EVENT SECTION
-   ========================================== */
-
-.event-section {
-    background: linear-gradient(180deg, var(--parchment) 0%, #fff 100%);
-}
-
-.treasure-map {
-    max-width: 1000px;
-    margin: 0 auto;
-    background: 
-        linear-gradient(rgba(245,230,211,0.9), rgba(245,230,211,0.9)),
-        url('https://www.transparenttextures.com/patterns/aged-paper.png');
-    border: 5px solid var(--gold);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    position: relative;
-}
-
-.treasure-map::before {
-    content: 'X';
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-family: 'Pirata One', cursive;
-    font-size: 3rem;
-    color: var(--red);
-    opacity: 0.3;
-}
-
-.map-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 2rem;
-    align-items: center;
-}
-
-.location-card {
-    background: white;
-    border: 3px solid var(--red-dark);
-    padding: 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    position: relative;
-    transition: transform 0.3s;
-}
-
-.location-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-}
-
-.location-icon {
-    width: 60px;
-    height: 60px;
-    background: var(--gold);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: -3rem auto 1rem;
-    border: 3px solid var(--red-dark);
-    font-size: 1.5rem;
-    color: var(--red-dark);
-}
-
-.location-card h3 {
-    font-family: 'Pirata One', cursive;
-    font-size: 1.5rem;
-    color: var(--red-dark);
-    margin-bottom: 1rem;
-}
-
-.location-details {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-
-.location-details p {
-    margin-bottom: 0.5rem;
-    font-size: 0.9rem;
-}
-
-.location-details i {
-    color: var(--gold);
-    width: 20px;
-    margin-right: 0.5rem;
-}
-
-.btn-maps {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background: var(--ocean-blue);
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s;
-    border: 2px solid var(--gold);
-}
-
-.btn-maps:hover {
-    background: var(--ocean-dark);
-    transform: scale(1.05);
-}
-
-.x-divider {
-    font-family: 'Pirata One', cursive;
-    font-size: 4rem;
-    color: var(--red);
-    text-shadow: 2px 2px 0 var(--gold);
-}
-
-/* Countdown */
-.countdown-treasure {
-    text-align: center;
-    margin-top: 3rem;
-    padding: 2rem;
-    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-    border-radius: 15px;
-    border: 4px solid var(--red-dark);
-}
-
-.countdown-treasure h3 {
-    font-family: 'Pirata One', cursive;
-    font-size: 1.8rem;
-    color: var(--red-dark);
-    margin-bottom: 1.5rem;
-}
-
-.countdown-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    flex-wrap: wrap;
-}
-
-.time-box {
-    background: var(--red-dark);
-    color: var(--gold);
-    padding: 1rem;
-    border-radius: 10px;
-    min-width: 80px;
-    border: 3px solid white;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.time-box span {
-    display: block;
-    font-size: 2rem;
-    font-weight: bold;
-    font-family: 'Pirata One', cursive;
-}
-
-.time-box label {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* ==========================================
-   GALLERY SECTION
-   ========================================== */
-
-.gallery-section {
-    background: var(--ocean-dark);
-    color: white;
-}
-
-.gallery-section .section-title {
-    color: var(--gold);
-    text-shadow: 2px 2px 0 var(--red-dark);
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    border: 4px solid var(--gold);
-    cursor: pointer;
-    aspect-ratio: 1;
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover {
-    transform: scale(1.05) rotate(2deg);
-    z-index: 10;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.1);
-}
-
-/* ==========================================
-   GIFT SECTION
-   ========================================== */
-
-.gift-section {
-    background: var(--parchment);
-    text-align: center;
-}
-
-.gift-intro {
-    font-style: italic;
-    font-size: 1.2rem;
-    color: var(--red-dark);
-    margin-bottom: 2rem;
-    font-family: 'Cinzel', serif;
-}
-
-.treasure-chests {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.chest-card {
-    background: linear-gradient(145deg, #8B4513 0%, #A0522D 100%);
-    border-radius: 20px;
-    padding: 2rem;
-    border: 5px solid var(--gold);
-    box-shadow: 
-        0 10px 30px rgba(0,0,0,0.3),
-        inset 0 0 20px rgba(0,0,0,0.2);
-    position: relative;
-    overflow: hidden;
-}
-
-.chest-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 10px;
-    background: var(--gold);
-}
-
-.chest-card.wide {
-    grid-column: span 2;
-}
-
-.chest-lid {
-    font-size: 3rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-    animation: bounce 2s infinite;
-}
-
-.chest-card h3 {
-    font-family: 'Pirata One', cursive;
-    color: var(--gold);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.qris-box {
-    background: white;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
-}
-
-.qris-box img {
-    max-width: 200px;
-    width: 100%;
-}
-
-.bank-accounts {
-    display: grid;
-    gap: 1rem;
-}
-
-.bank-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(255,255,255,0.1);
-    padding: 1rem;
-    border-radius: 10px;
-    border: 2px solid var(--gold);
-    transition: transform 0.3s;
-}
-
-.bank-item:hover {
-    transform: translateX(10px);
-    background: rgba(255,255,255,0.2);
-}
-
-.bank-item img {
-    width: 50px;
-    height: 50px;
-    object-fit: contain;
-    background: white;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.bank-info {
-    flex: 1;
-    text-align: left;
-    color: white;
-}
-
-.bank-name {
-    font-weight: bold;
-    color: var(--gold);
-    margin-bottom: 0.3rem;
-}
-
-.account-number {
-    font-family: 'Courier New', monospace;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: white;
-    transition: color 0.3s;
-}
-
-.account-number:hover {
-    color: var(--gold);
-}
-
-.account-name {
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-/* ==========================================
-   RSVP SECTION
-   ========================================== */
-
-.rsvp-section {
-    background: linear-gradient(180deg, #fff 0%, var(--parchment) 100%);
-}
-
-.parchment {
-    max-width: 600px;
-    margin: 0 auto;
-    background: 
-        linear-gradient(rgba(245,230,211,0.95), rgba(245,230,211,0.95)),
-        url('https://www.transparenttextures.com/patterns/aged-paper.png');
-    border: 4px solid var(--gold);
-    border-radius: 15px;
-    padding: 2rem;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-    position: relative;
-}
-
-.parchment::before,
-.parchment::after {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: var(--red-dark);
-    border-radius: 50%;
-    border: 3px solid var(--gold);
-}
-
-.parchment::before {
-    top: 15px;
-    left: 15px;
-}
-
-.parchment::after {
-    top: 15px;
-    right: 15px;
-}
-
-.rsvp-text {
-    text-align: center;
-    font-style: italic;
-    color: var(--red-dark);
-    margin-bottom: 2rem;
-    font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
-}
-
-.rsvp-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--red-dark);
-    font-weight: 600;
-}
-
-.form-group label i {
-    color: var(--gold);
-    margin-right: 0.5rem;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid var(--gold);
-    border-radius: 10px;
-    background: white;
-    font-family: 'Poppins', sans-serif;
-    transition: all 0.3s;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--red);
-    box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
-}
-
-.btn-submit {
-    padding: 1rem;
-    background: var(--red);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    border: 3px solid var(--gold);
-    font-family: 'Pirata One', cursive;
-    letter-spacing: 1px;
-}
-
-.btn-submit:hover {
-    background: var(--red-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-/* ==========================================
-   FOOTER
-   ========================================== */
-
-.footer {
-    background: var(--ocean-dark);
-    color: white;
-    text-align: center;
-    padding: 4rem 2rem 2rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer-waves {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 50px;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') top/cover no-repeat;
-}
-
-.footer-content {
-    position: relative;
-    z-index: 2;
-}
-
-.straw-hat-logo {
-    font-size: 4rem;
-    color: var(--gold);
-    margin-bottom: 1rem;
-}
-
-.thanks {
-    font-family: 'Pirata One', cursive;
-    font-size: 2.5rem;
-    color: var(--gold);
-    margin-bottom: 0.5rem;
-}
-
-#footer-names {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.one-piece-quote {
-    font-style: italic;
-    color: var(--gold-light);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-}
-
-/* Watermark Footer */
-.watermark-designer {
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255,255,255,0.2);
-    font-size: 0.9rem;
-    opacity: 0.8;
-}
-
-.watermark-designer p {
-    margin-bottom: 0.3rem;
-    color: rgba(255,255,255,0.9);
-}
-
-.watermark-designer strong {
-    color: var(--gold);
-}
-
-.watermark-designer a {
-    color: #25d366;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s;
-}
-
-.watermark-designer a:hover {
-    color: var(--gold);
-    transform: scale(1.05);
-}
-
-/* ==========================================
-   FIXED WATERMARK
-   ========================================== */
-
-.fixed-watermark {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-    z-index: 999;
-    background: rgba(139, 69, 19, 0.95);
-    padding: 0.6rem 1rem;
-    border-radius: 25px;
-    border: 2px solid var(--gold);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s;
-}
-
-.fixed-watermark:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-}
-
-.fixed-watermark a {
-    color: var(--gold);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.fixed-watermark i {
-    color: var(--gold);
-}
-
-/* ==========================================
-   LIGHTBOX
-   ========================================== */
-
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.95);
-    z-index: 2000;
-    justify-content: center;
-    align-items: center;
-}
-
-.lightbox.active {
-    display: flex;
-}
-
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border: 5px solid var(--gold);
-    border-radius: 10px;
-}
-
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    color: var(--gold);
-    font-size: 3rem;
-    cursor: pointer;
-    font-family: 'Pirata One', cursive;
-}
-
-/* ==========================================
-   RESPONSIVE
-   ========================================== */
-
-@media (max-width: 768px) {
-    .poster-header h2 {
-        font-size: 3rem;
-    }
-    
-    .wanted-name {
-        font-size: 2rem;
-    }
-    
-    .hero h1 {
-        font-size: 2.5rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .map-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .x-divider {
-        display: none;
-    }
-    
-    .chest-card.wide {
-        grid-column: span 1;
-    }
-    
-    .wanted-posters-container {
-        flex-direction: column;
-    }
-    
-    .fixed-watermark {
-        bottom: 75px;
-        right: 10px;
-        padding: 0.5rem 0.8rem;
-    }
-    
-    .fixed-watermark a {
-        font-size: 0.75rem;
-    }
-}
-
-/* Utility */
-.hidden {
-    display: none !important;
-}
+    <style>
+        /* ==========================================
+           ONE PIECE WEDDING THEME
+           ========================================== */
+
+        :root {
+            --gold: #D4AF37;
+            --gold-light: #F4E4BC;
+            --red: #C41E3A;
+            --red-dark: #8B0000;
+            --purple: #8B008B;
+            --parchment: #F5E6D3;
+            --parchment-dark: #E6D2B5;
+            --ocean-blue: #006994;
+            --ocean-dark: #003B5C;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #87CEEB 0%, #E0F6FF 50%, #F5E6D3 100%);
+            color: #2c3e50;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================
+           NAVIGATION MENU (Like Snow Theme)
+           ========================================== */
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(139, 69, 19, 0.98) 0%, rgba(139, 69, 19, 0.95) 100%);
+            z-index: 999;
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-bottom: 3px solid var(--gold);
+            transform: translateY(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .nav-menu.visible {
+            transform: translateY(0);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 1rem;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .nav-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.5rem 1rem;
+            color: var(--gold-light);
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            min-width: 60px;
+            position: relative;
+        }
+
+        .nav-item i {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .nav-item span {
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .nav-item:hover {
+            color: white;
+            background: rgba(212, 175, 55, 0.2);
+        }
+
+        .nav-item:hover i {
+            transform: translateY(-3px);
+        }
+
+        .nav-item.active {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.3);
+        }
+
+        .nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .nav-menu {
+                top: auto;
+                bottom: 0;
+                border-bottom: none;
+                border-top: 3px solid var(--gold);
+                transform: translateY(100%);
+            }
+            
+            .nav-menu.visible {
+                transform: translateY(0);
+            }
+            
+            .nav-container {
+                justify-content: space-around;
+                gap: 0.3rem;
+            }
+            
+            .nav-item {
+                padding: 0.4rem 0.6rem;
+                min-width: 50px;
+            }
+            
+            .nav-item i {
+                font-size: 1.1rem;
+            }
+            
+            .nav-item span {
+                font-size: 0.6rem;
+            }
+            
+            section {
+                padding-bottom: 6rem;
+            }
+            
+            .fixed-watermark {
+                bottom: 90px;
+            }
+            
+            .music-btn {
+                bottom: 90px;
+            }
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        @media (max-width: 768px) {
+            section {
+                scroll-margin-top: 20px;
+                scroll-margin-bottom: 80px;
+            }
+        }
+
+        /* ==========================================
+           LOADING SCREEN
+           ========================================== */
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--ocean-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .loading-content {
+            text-align: center;
+            color: var(--gold);
+        }
+
+        .loading-content i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading-content p {
+            font-size: 1.2rem;
+            font-family: 'Pirata One', cursive;
+            letter-spacing: 2px;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* ==========================================
+           MUSIC BUTTON
+           ========================================== */
+
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--red-dark);
+            border: 3px solid var(--red);
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        .music-btn.playing {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* ==========================================
+           COVER - WANTED POSTER
+           ========================================== */
+
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: 
+                linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
+            padding: 2rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: transform 1s ease-in-out, opacity 1s;
+        }
+
+        .cover.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .wanted-poster {
+            max-width: 500px;
+            width: 100%;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .poster-border {
+            background: var(--parchment);
+            border: 8px solid var(--gold);
+            padding: 2rem;
+            box-shadow: 
+                0 0 0 4px var(--red-dark),
+                0 20px 60px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(139, 69, 19, 0.1);
+            position: relative;
+        }
+
+        .poster-border::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid var(--red-dark);
+            pointer-events: none;
+        }
+
+        .poster-header {
+            text-align: center;
+            border-bottom: 3px solid var(--red-dark);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .poster-header h2 {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            color: var(--red-dark);
+            letter-spacing: 5px;
+            text-shadow: 2px 2px 0 var(--gold);
+        }
+
+        .poster-subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 0.9rem;
+            color: var(--red-dark);
+            letter-spacing: 3px;
+        }
+
+        .couple-wanted {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        .wanted-photo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .wanted-photo {
+            width: 250px;
+            height: 300px;
+            border: 4px solid var(--red-dark);
+            background: #ddd;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .wanted-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(0.3) contrast(1.1);
+        }
+
+        .wanted-photo::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(139, 69, 19, 0.03) 2px,
+                rgba(139, 69, 19, 0.03) 4px
+            );
+            pointer-events: none;
+        }
+
+        .bounty-stamp {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: var(--red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            border: 3px solid var(--gold);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .wanted-name {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--red-dark);
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 0 var(--gold);
+        }
+
+        .wanted-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .poster-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            border-top: 2px solid var(--red-dark);
+            padding-top: 1rem;
+        }
+
+        .dead-or-alive {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.5rem;
+            color: var(--red-dark);
+            letter-spacing: 3px;
+        }
+
+        .wedding-date {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 0.5rem 0;
+            font-weight: 600;
+        }
+
+        .berry-symbol {
+            color: var(--gold);
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .btn-buka {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--red);
+            color: white;
+            border: none;
+            font-family: 'Pirata One', cursive;
+            font-size: 1.3rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-buka::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-buka:hover::before {
+            left: 100%;
+        }
+
+        .btn-buka:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ==========================================
+           MAIN CONTENT
+           ========================================== */
+
+        #main-content {
+            opacity: 0;
+            transition: opacity 1s;
+            padding-top: 0;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* ==========================================
+           HERO SECTION
+           ========================================== */
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: 
+                linear-gradient(rgba(0,59,92,0.8), rgba(0,105,148,0.8)),
+                url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?w=1920') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ocean-waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom/cover no-repeat;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+        }
+
+        .straw-hat-icon {
+            font-size: 5rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            animation: tilt 3s ease-in-out infinite;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+
+        @keyframes tilt {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        .adventure-text {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            color: white;
+            text-shadow: 3px 3px 0 var(--red-dark);
+            margin-bottom: 1rem;
+        }
+
+        .hero-quote {
+            font-style: italic;
+            color: var(--gold-light);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .devil-fruit-decoration {
+            margin-top: 2rem;
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* ==========================================
+           SECTIONS GENERAL
+           ========================================== */
+
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Pirata One', cursive;
+            font-size: 3rem;
+            text-align: center;
+            color: var(--red-dark);
+            margin-bottom: 3rem;
+            text-shadow: 2px 2px 0 var(--gold);
+        }
+
+        .section-title i {
+            color: var(--gold);
+            margin: 0 1rem;
+        }
+
+        /* ==========================================
+           COUPLE SECTION - WANTED POSTERS
+           ========================================== */
+
+        .couple-section {
+            background: var(--parchment);
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px),
+                repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(139,69,19,.05) 35px, rgba(139,69,19,.05) 70px);
+        }
+
+        .wanted-posters-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .wanted-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .wanted-paper {
+            background: var(--parchment);
+            border: 6px solid var(--gold);
+            padding: 1.5rem;
+            box-shadow: 
+                0 0 0 3px var(--red-dark),
+                0 15px 40px rgba(0,0,0,0.3),
+                inset 0 0 60px rgba(139, 69, 19, 0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.3s;
+        }
+
+        .wanted-card:hover .wanted-paper {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .bride-card .wanted-paper {
+            transform: rotate(2deg);
+        }
+
+        .bride-card:hover .wanted-paper {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .wanted-header {
+            text-align: center;
+            border-bottom: 3px solid var(--red-dark);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .wanted-header h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--red-dark);
+            letter-spacing: 3px;
+        }
+
+        .wanted-image {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .wanted-image img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border: 3px solid var(--red-dark);
+            filter: sepia(0.2);
+        }
+
+        .bounty-tag {
+            position: absolute;
+            bottom: -10px;
+            right: -10px;
+            background: var(--gold);
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--red-dark);
+            font-family: 'Pirata One', cursive;
+            font-size: 1.2rem;
+            color: var(--red-dark);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .berry {
+            color: var(--red);
+            margin-right: 0.3rem;
+        }
+
+        .wanted-info {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .wanted-info h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: var(--red-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .alias {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .devil-fruit {
+            background: var(--red-dark);
+            color: var(--gold);
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .parents {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .dream {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: var(--ocean-blue);
+            border-top: 1px dashed #ccc;
+            padding-top: 0.5rem;
+        }
+
+        .wanted-footer {
+            text-align: center;
+            font-family: 'Pirata One', cursive;
+            color: var(--red-dark);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            border-top: 2px solid var(--red-dark);
+            padding-top: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .heart-divider {
+            font-size: 4rem;
+            color: var(--red);
+            position: relative;
+            animation: pulse-heart 2s infinite;
+        }
+
+        .heart-divider .x-mark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Pirata One', cursive;
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* ==========================================
+           EVENT SECTION
+           ========================================== */
+
+        .event-section {
+            background: linear-gradient(180deg, var(--parchment) 0%, #fff 100%);
+        }
+
+        .treasure-map {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: 
+                linear-gradient(rgba(245,230,211,0.9), rgba(245,230,211,0.9)),
+                url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            border: 5px solid var(--gold);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .treasure-map::before {
+            content: 'X';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-family: 'Pirata One', cursive;
+            font-size: 3rem;
+            color: var(--red);
+            opacity: 0.3;
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .location-card {
+            background: white;
+            border: 3px solid var(--red-dark);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .location-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: -3rem auto 1rem;
+            border: 3px solid var(--red-dark);
+            font-size: 1.5rem;
+            color: var(--red-dark);
+        }
+
+        .location-card h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.5rem;
+            color: var(--red-dark);
+            margin-bottom: 1rem;
+        }
+
+        .location-details {
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .location-details p {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .location-details i {
+            color: var(--gold);
+            width: 20px;
+            margin-right: 0.5rem;
+        }
+
+        .btn-maps {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--ocean-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: 2px solid var(--gold);
+        }
+
+        .btn-maps:hover {
+            background: var(--ocean-dark);
+            transform: scale(1.05);
+        }
+
+        .x-divider {
+            font-family: 'Pirata One', cursive;
+            font-size: 4rem;
+            color: var(--red);
+            text-shadow: 2px 2px 0 var(--gold);
+        }
+
+        /* Countdown */
+        .countdown-treasure {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 15px;
+            border: 4px solid var(--red-dark);
+        }
+
+        .countdown-treasure h3 {
+            font-family: 'Pirata One', cursive;
+            font-size: 1.8rem;
+            color: var(--red-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .countdown-boxes {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: var(--red-dark);
+            color: var(--gold);
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 80px;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Pirata One', cursive;
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           GALLERY SECTION
+           ========================================== */
+
+        .gallery-section {
+            background: var(--ocean-dark);
+            color: white;
+        }
+
+        .gallery-section .section-title {
+            color: var(--gold);
+            text-shadow: 2px 2px 0 var(--red-dark);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 4px solid var(--gold);
+            cursor: pointer;
+            aspect-ratio: 1;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* ==========================================
+           GIFT SECTION
+           ========================================== */
+
+        .gift-section {
+            background: var(--parchment);
+            text-align: center;
+        }
+
+        .gift-intro {
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--red-dark);
+            margin-bottom: 2rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .treasure-chests {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .chest-card {
+            background: linear-gradient(145deg, #8B4513 0%, #A0522D 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 5px solid var(--gold);
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.3),
+                inset 0 0 20px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chest-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--gold);
+        }
+
+        .chest-card.wide {
+            grid-column: span 2;
+        }
+
+        .chest-lid {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        .chest-card h3 {
+            font-family: 'Pirata One', cursive;
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .qris-box {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .qris-box img {
+            max-width: 200px;
+            width: 100%;
+        }
+
+        .bank-accounts {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .bank-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            transition: transform 0.3s;
+        }
+
+        .bank-item:hover {
+            transform: translateX(10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .bank-item .bank-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--ocean-blue);
+        }
+
+        .bank-info {
+            flex: 1;
+            text-align: left;
+            color: white;
+        }
+
+        .bank-name {
+            font-weight: bold;
+            color: var(--gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .account-number {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .account-number:hover {
+            color: var(--gold);
+        }
+
+        .account-name {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* ==========================================
+           RSVP SECTION
+           ========================================== */
+
+        .rsvp-section {
+            background: linear-gradient(180deg, #fff 0%, var(--parchment) 100%);
+        }
+
+        .parchment {
+            max-width: 600px;
+            margin: 0 auto;
+            background: 
+                linear-gradient(rgba(245,230,211,0.95), rgba(245,230,211,0.95)),
+                url('https://www.transparenttextures.com/patterns/aged-paper.png');
+            border: 4px solid var(--gold);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .parchment::before,
+        .parchment::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--red-dark);
+            border-radius: 50%;
+            border: 3px solid var(--gold);
+        }
+
+        .parchment::before {
+            top: 15px;
+            left: 15px;
+        }
+
+        .parchment::after {
+            top: 15px;
+            right: 15px;
+        }
+
+        .rsvp-text {
+            text-align: center;
+            font-style: italic;
+            color: var(--red-dark);
+            margin-bottom: 2rem;
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+        }
+
+        .rsvp-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--red-dark);
+            font-weight: 600;
+        }
+
+        .form-group label i {
+            color: var(--gold);
+            margin-right: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gold);
+            border-radius: 10px;
+            background: white;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
+        }
+
+        .btn-submit {
+            padding: 1rem;
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid var(--gold);
+            font-family: 'Pirata One', cursive;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ==========================================
+           FOOTER
+           ========================================== */
+
+        .footer {
+            background: var(--ocean-dark);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23F5E6D3" fill-opacity="1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>') top/cover no-repeat;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .straw-hat-logo {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .thanks {
+            font-family: 'Pirata One', cursive;
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        #footer-names {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .one-piece-quote {
+            font-style: italic;
+            color: var(--gold-light);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Watermark Footer */
+        .watermark-designer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .watermark-designer p {
+            margin-bottom: 0.3rem;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .watermark-designer strong {
+            color: var(--gold);
+        }
+
+        .watermark-designer a {
+            color: #25d366;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .watermark-designer a:hover {
+            color: var(--gold);
+            transform: scale(1.05);
+        }
+
+        /* ==========================================
+           FIXED WATERMARK
+           ========================================== */
+
+        .fixed-watermark {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            z-index: 999;
+            background: rgba(139, 69, 19, 0.95);
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+        }
+
+        .fixed-watermark:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .fixed-watermark a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fixed-watermark i {
+            color: var(--gold);
+        }
+
+        /* ==========================================
+           LIGHTBOX
+           ========================================== */
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 5px solid var(--gold);
+            border-radius: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--gold);
+            font-size: 3rem;
+            cursor: pointer;
+            font-family: 'Pirata One', cursive;
+        }
+
+        /* ==========================================
+           RESPONSIVE
+           ========================================== */
+
+        @media (max-width: 768px) {
+            .poster-header h2 {
+                font-size: 3rem;
+            }
+            
+            .wanted-name {
+                font-size: 2rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .map-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .x-divider {
+                display: none;
+            }
+            
+            .chest-card.wide {
+                grid-column: span 1;
+            }
+            
+            .wanted-posters-container {
+                flex-direction: column;
+            }
+            
+            .fixed-watermark {
+                bottom: 75px;
+                right: 10px;
+                padding: 0.5rem 0.8rem;
+            }
+            
+            .fixed-watermark a {
+                font-size: 0.75rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <i class="fas fa-anchor fa-spin"></i>
+            <p>Loading Grand Line...</p>
+        </div>
+    </div>
+
+    <!-- Music Control -->
+    <button id="music-toggle" class="music-btn" onclick="toggleMusic()">
+        <i class="fas fa-music"></i>
+    </button>
+
+    <!-- Audio -->
+    <audio id="bg-music" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Navigation Menu -->
+    <nav class="nav-menu" id="nav-menu">
+        <div class="nav-container">
+            <a href="#hero" class="nav-item active" onclick="setActiveNav(this)">
+                <i class="fas fa-home"></i>
+                <span>Beranda</span>
+            </a>
+            <a href="#couple" class="nav-item" onclick="setActiveNav(this)">
+                <i class="fas fa-user-friends"></i>
+                <span>Mempelai</span>
+            </a>
+            <a href="#event" class="nav-item" onclick="setActiveNav(this)">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Acara</span>
+            </a>
+            <a href="#gallery" class="nav-item" onclick="setActiveNav(this)">
+                <i class="fas fa-images"></i>
+                <span>Galeri</span>
+            </a>
+            <a href="#gift" class="nav-item" onclick="setActiveNav(this)">
+                <i class="fas fa-gift"></i>
+                <span>Kado</span>
+            </a>
+            <a href="#rsvp" class="nav-item" onclick="setActiveNav(this)">
+                <i class="fas fa-scroll"></i>
+                <span>RSVP</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Cover Section -->
+    <section id="cover" class="cover">
+        <div class="wanted-poster">
+            <div class="poster-border">
+                <div class="poster-header">
+                    <h2>WANTED</h2>
+                    <p class="poster-subtitle">THE WEDDING OF</p>
+                </div>
+                
+                <div class="couple-wanted">
+                    <div class="wanted-photo-container">
+                        <div class="wanted-photo" id="cover-photo">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=500" alt="Couple" id="cover-img">
+                        </div>
+                        <div class="bounty-stamp">♥</div>
+                    </div>
+                    
+                    <h1 class="wanted-name" id="cover-names">Luffy & Hancock</h1>
+                    <p class="wanted-title" id="cover-alias">King & Queen of Pirates</p>
+                </div>
+
+                <div class="poster-footer">
+                    <p class="dead-or-alive">DEAD OR ALIVE</p>
+                    <p class="wedding-date" id="cover-date">22 Mei 2024</p>
+                    <p class="berry-symbol">♥ Beri Cinta Sejati ♥</p>
+                </div>
+
+                <button class="btn-buka" onclick="openInvitation()">
+                    <i class="fas fa-scroll"></i> BUKA UNDANGAN
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main-content" class="hidden">
+        
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="ocean-waves"></div>
+            <div class="hero-content">
+                <div class="straw-hat-icon">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <p class="adventure-text">Petualangan Baru Dimulai</p>
+                <h1 id="hero-names">Monkey D. Luffy & Boa Hancock</h1>
+                <p class="hero-quote" id="hero-quote">"Aku akan menjadi Raja Bajak Laut... dan suamimu!"</p>
+                <div class="devil-fruit-decoration">
+                    <span class="fruit-icon">🍎</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Couple Section -->
+        <section id="couple" class="couple-section">
+            <h2 class="section-title">
+                <i class="fas fa-skull-crossbones"></i> 
+                Bounty Couple 
+                <i class="fas fa-skull-crossbones"></i>
+            </h2>
+            
+            <div class="wanted-posters-container">
+                <!-- Groom Wanted Poster -->
+                <div class="wanted-card groom-card">
+                    <div class="wanted-paper">
+                        <div class="wanted-header">
+                            <h3>WANTED</h3>
+                        </div>
+                        <div class="wanted-image">
+                            <img id="photo-pria" src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400" alt="Groom">
+                            <div class="bounty-tag">
+                                <span class="berry">♥</span>
+                                <span id="bounty-pria">3.000.000.000</span>
+                            </div>
+                        </div>
+                        <div class="wanted-info">
+                            <h3 id="nama-pria">Monkey D. Luffy</h3>
+                            <p class="alias" id="alias-pria">"Mugiwara no Luffy"</p>
+                            <p class="devil-fruit" id="df-pria">🍎 Hito Hito no Mi</p>
+                            <p class="parents" id="ortu-pria">Putra dari Dragon & Dadan</p>
+                            <p class="dream" id="dream-pria">Menjadi Raja Bajak Laut</p>
+                        </div>
+                        <div class="wanted-footer">DEAD OR ALIVE</div>
+                    </div>
+                </div>
+
+                <!-- Heart Divider -->
+                <div class="heart-divider">
+                    <i class="fas fa-heart"></i>
+                    <span class="x-mark">X</span>
+                </div>
+
+                <!-- Bride Wanted Poster -->
+                <div class="wanted-card bride-card">
+                    <div class="wanted-paper">
+                        <div class="wanted-header">
+                            <h3>WANTED</h3>
+                        </div>
+                        <div class="wanted-image">
+                            <img id="photo-wanita" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400" alt="Bride">
+                            <div class="bounty-tag">
+                                <span class="berry">♥</span>
+                                <span id="bounty-wanita">1.659.000.000</span>
+                            </div>
+                        </div>
+                        <div class="wanted-info">
+                            <h3 id="nama-wanita">Boa Hancock</h3>
+                            <p class="alias" id="alias-wanita">"Pirate Empress"</p>
+                            <p class="devil-fruit" id="df-wanita">🍎 Mero Mero no Mi</p>
+                            <p class="parents" id="ortu-wanita">Putri dari Amazon Lily</p>
+                            <p class="dream" id="dream-wanita">Bersama Luffy-sama</p>
+                        </div>
+                        <div class="wanted-footer">DEAD OR ALIVE</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Event Section -->
+        <section id="event" class="event-section">
+            <h2 class="section-title">
+                <i class="fas fa-map-marked-alt"></i> 
+                Lokasi Petualangan 
+                <i class="fas fa-map-marked-alt"></i>
+            </h2>
+            
+            <div class="treasure-map">
+                <div class="map-container">
+                    <!-- Akad -->
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-gavel"></i>
+                        </div>
+                        <h3>Akad Nikah</h3>
+                        <div class="location-details">
+                            <p><i class="fas fa-calendar"></i> <span id="akad-date">Sabtu, 22 Mei 2024</span></p>
+                            <p><i class="fas fa-clock"></i> <span id="akad-time">08:00 WIB</span></p>
+                            <p><i class="fas fa-building"></i> <span id="akad-venue">Masjid Al-Hikmah</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="akad-address">Jl. Grand Line No. 1001, Jakarta</span></p>
+                        </div>
+                        <a id="akad-maps" href="https://maps.google.com" class="btn-maps" target="_blank">
+                            <i class="fas fa-compass"></i> Lihat Peta Harta Karun
+                        </a>
+                    </div>
+
+                    <!-- X Mark -->
+                    <div class="x-divider">X</div>
+
+                    <!-- Resepsi -->
+                    <div class="location-card">
+                        <div class="location-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3>Resepsi</h3>
+                        <div class="location-details">
+                            <p><i class="fas fa-calendar"></i> <span id="resepsi-date">Sabtu, 22 Mei 2024</span></p>
+                            <p><i class="fas fa-clock"></i> <span id="resepsi-time">11:00 - 14:00 WIB</span></p>
+                            <p><i class="fas fa-building"></i> <span id="resepsi-venue">Thousand Sunny Hall</span></p>
+                            <p><i class="fas fa-map-marker-alt"></i> <span id="resepsi-address">Jl. New World No. 56, Jakarta</span></p>
+                        </div>
+                        <a id="resepsi-maps" href="https://maps.google.com" class="btn-maps" target="_blank">
+                            <i class="fas fa-compass"></i> Lihat Peta Harta Karun
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown-treasure">
+                <h3><i class="fas fa-hourglass-half"></i> Menuju Hari H</h3>
+                <div id="countdown" class="countdown-boxes">
+                    <div class="time-box">
+                        <span id="days">00</span>
+                        <label>Hari</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="hours">00</span>
+                        <label>Jam</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="minutes">00</span>
+                        <label>Menit</label>
+                    </div>
+                    <div class="time-box">
+                        <span id="seconds">00</span>
+                        <label>Detik</label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="gallery-section">
+            <h2 class="section-title">
+                <i class="fas fa-images"></i> 
+                Galeri Petualangan 
+                <i class="fas fa-images"></i>
+            </h2>
+            
+            <div class="gallery-grid" id="gallery-container">
+                <!-- Gallery items via JS -->
+            </div>
+        </section>
+
+        <!-- Gift Section -->
+        <section id="gift" class="gift-section">
+            <h2 class="section-title">
+                <i class="fas fa-gift"></i> 
+                Harta Karun (Kado) 
+                <i class="fas fa-gift"></i>
+            </h2>
+            
+            <p class="gift-intro">
+                "Bajak Laut tidak pernah berbagi harta... kecuali untuk keluarga!"
+            </p>
+
+            <div class="treasure-chests">
+                <!-- QRIS -->
+                <div class="chest-card">
+                    <div class="chest-lid">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3>Scan QRIS</h3>
+                    <div class="qris-box">
+                        <img id="qris-image" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=SampleQRIS" alt="QRIS">
+                    </div>
+                    <p>Scan untuk transfer</p>
+                </div>
+
+                <!-- Bank Transfer -->
+                <div class="chest-card wide">
+                    <div class="chest-lid">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Transfer Bank</h3>
+                    <div class="bank-accounts" id="bank-list">
+                        <div class="bank-item">
+                            <div class="bank-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="bank-info">
+                                <div class="bank-name">Bank BCA</div>
+                                <div class="account-number" onclick="copyToClipboard('1234567890')">1234567890</div>
+                                <div class="account-name">a.n. Monkey D. Luffy</div>
+                            </div>
+                        </div>
+                        <div class="bank-item">
+                            <div class="bank-icon">
+                                <i class="fas fa-university"></i>
+                            </div>
+                            <div class="bank-info">
+                                <div class="bank-name">Bank Mandiri</div>
+                                <div class="account-number" onclick="copyToClipboard('0987654321')">0987654321</div>
+                                <div class="account-name">a.n. Boa Hancock</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RSVP Section -->
+        <section id="rsvp" class="rsvp-section">
+            <h2 class="section-title">
+                <i class="fas fa-scroll"></i> 
+                Konfirmasi Kehadiran 
+                <i class="fas fa-scroll"></i>
+            </h2>
+            
+            <div class="parchment">
+                <p class="rsvp-text">
+                    "Kru Straw Hat mengundangmu untuk bergabung dalam petualangan terbesar ini!"
+                </p>
+
+                <form id="rsvp-form" class="rsvp-form" onsubmit="submitRSVP(event)">
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Nama Bajak Laut</label>
+                        <input type="text" id="guest-name" placeholder="Masukkan nama Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-check-circle"></i> Konfirmasi Kehadiran</label>
+                        <select id="attendance" required>
+                            <option value="">Pilih status...</option>
+                            <option value="Hadir">⚓ Akan Hadir (Saya siap berlayar!)</option>
+                            <option value="Tidak Hadir">🌊 Tidak Bisa Hadir (Saya terdampar!)</option>
+                            <option value="Masih Ragu">🗺️ Masih Ragu (Menunggu angin!)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-users"></i> Jumlah Kru (Tamu)</label>
+                        <input type="number" id="guest-count" placeholder="Berapa orang?" min="1" max="10" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label><i class="fas fa-comment"></i> Pesan/Ucapan</label>
+                        <textarea id="guest-message" placeholder="Tulis pesan atau doa untuk kami..." rows="3"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">
+                        <i class="fab fa-whatsapp"></i> Kirim via Den Den Mushi (WA)
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-waves"></div>
+            <div class="footer-content">
+                <div class="straw-hat-logo">
+                    <i class="fas fa-hat-cowboy"></i>
+                </div>
+                <p class="thanks">Terima Kasih, Nakama!</p>
+                <p id="footer-names">Luffy & Hancock</p>
+                <p class="one-piece-quote">"Akan ada seseorang yang membawa perdamaian... dan itu adalah kami!"</p>
+                
+                <!-- Watermark -->
+                <div class="watermark-designer" id="watermark-footer">
+                    <p>Design by <strong>Malik</strong></p>
+                    <a href="https://wa.me/6285882618717" id="watermark-wa" target="_blank">
+                        <i class="fab fa-whatsapp"></i> <span id="watermark-phone">085882618717</span>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- Fixed Watermark -->
+    <div class="fixed-watermark" id="fixed-watermark">
+        <a href="https://wa.me/6285882618717" target="_blank">
+            <i class="fas fa-palette"></i> Design by Malik
+        </a>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="Full size">
+    </div>
+
+    <script>
+        // Configuration
+        const config = {
+            couple: {
+                coverPhoto: "https://images.unsplash.com/photo-1519741497674-611481863552?w=500",
+                groom: {
+                    photo: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400",
+                    name: "Monkey D. Luffy",
+                    alias: "Mugiwara no Luffy",
+                    bounty: "3.000.000.000",
+                    devilFruit: "Hito Hito no Mi",
+                    parents: "Putra dari Dragon & Dadan",
+                    dream: "Menjadi Raja Bajak Laut"
+                },
+                bride: {
+                    photo: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400",
+                    name: "Boa Hancock",
+                    alias: "Pirate Empress",
+                    bounty: "1.659.000.000",
+                    devilFruit: "Mero Mero no Mi",
+                    parents: "Putri dari Amazon Lily",
+                    dream: "Bersama Luffy-sama"
+                }
+            },
+            event: {
+                akad: {
+                    date: "Sabtu, 22 Mei 2024",
+                    time: "08:00 WIB",
+                    venue: "Masjid Al-Hikmah",
+                    address: "Jl. Grand Line No. 1001, Jakarta",
+                    maps: "https://maps.google.com"
+                },
+                resepsi: {
+                    date: "Sabtu, 22 Mei 2024",
+                    time: "11:00 - 14:00 WIB",
+                    venue: "Thousand Sunny Hall",
+                    address: "Jl. New World No. 56, Jakarta",
+                    maps: "https://maps.google.com"
+                }
+            },
+            gallery: [
+                "https://images.unsplash.com/photo-1519741497674-611481863552?w=600",
+                "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=600",
+                "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600",
+                "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600",
+                "https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=600",
+                "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600"
+            ],
+            weddingDate: "2024-05-22T08:00:00",
+            whatsapp: "6285882618717"
+        };
+
+        // Initialize
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loading').classList.add('hidden');
+            }, 2000);
+
+            initGallery();
+            startCountdown();
+        });
+
+        // Open Invitation
+        function openInvitation() {
+            document.getElementById('cover').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            
+            setTimeout(() => {
+                document.getElementById('main-content').classList.add('visible');
+                document.getElementById('nav-menu').classList.add('visible');
+            }, 100);
+            
+            document.body.style.overflow = 'auto';
+            
+            // Auto play music
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            music.play().then(() => {
+                btn.classList.add('playing');
+            }).catch(e => console.log('Autoplay prevented'));
+        }
+
+        // Music Toggle
+        function toggleMusic() {
+            const music = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+            
+            if (music.paused) {
+                music.play();
+                btn.classList.add('playing');
+                btn.innerHTML = '<i class="fas fa-music"></i>';
+            } else {
+                music.pause();
+                btn.classList.remove('playing');
+                btn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        }
+
+        // Navigation Active State
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        // Scroll Spy for Navigation
+        window.addEventListener('scroll', () => {
+            const sections = ['hero', 'couple', 'event', 'gallery', 'gift', 'rsvp'];
+            const scrollPos = window.scrollY + 100;
+
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                if (element) {
+                    const top = element.offsetTop;
+                    const bottom = top + element.offsetHeight;
+                    
+                    if (scrollPos >= top && scrollPos < bottom) {
+                        document.querySelectorAll('.nav-item').forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('href') === `#${section}`) {
+                                item.classList.add('active');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+
+        // Gallery Initialization
+        function initGallery() {
+            const container = document.getElementById('gallery-container');
+            config.gallery.forEach((img, index) => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `
+                    <img src="${img}" alt="Gallery ${index + 1}" onclick="openLightbox('${img}')">
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Lightbox
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Countdown
+        function startCountdown() {
+            const targetDate = new Date(config.weddingDate).getTime();
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+                
+                if (distance > 0) {
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    document.getElementById('days').textContent = String(days).padStart(2, '0');
+                    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                }
+            }, 1000);
+        }
+
+        // Copy to Clipboard
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Nomor rekening disalin: ' + text);
+            });
+        }
+
+        // RSVP Form Submit
+        function submitRSVP(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('guest-name').value;
+            const attendance = document.getElementById('attendance').value;
+            const count = document.getElementById('guest-count').value;
+            const message = document.getElementById('guest-message').value;
+            
+            const text = `*Konfirmasi Kehadiran Wedding One Piece*%0A%0A` +
+                        `*Nama:* ${name}%0A` +
+                        `*Kehadiran:* ${attendance}%0A` +
+                        `*Jumlah Tamu:* ${count} orang%0A` +
+                        `*Pesan:* ${message || '-'}`;
+            
+            window.open(`https://wa.me/${config.whatsapp}?text=${text}`, '_blank');
+        }
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+</html>

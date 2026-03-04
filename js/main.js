@@ -19,6 +19,110 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ==========================================
+// NAVIGATION MENU
+// ==========================================
+
+function initNavigation() {
+    const nav = document.getElementById('nav-menu');
+    const sections = document.querySelectorAll('section[id]');
+    const navItems = document.querySelectorAll('.nav-item');
+    
+    // Show nav after opening invitation
+    window.showNavigation = function() {
+        nav.classList.add('visible');
+    };
+    
+    // Active section on scroll
+    window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= (sectionTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navItems.forEach(item => {
+            item.classList.remove('active');
+            if (item.getAttribute('href') === `#${current}`) {
+                item.classList.add('active');
+            }
+        });
+    });
+    
+    // Smooth scroll for nav items
+    navItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = item.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const offset = window.innerWidth <= 768 ? 80 : 80;
+                const targetPosition = targetSection.offsetTop - offset;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// ==========================================
+// UPDATE OPEN INVITATION FUNCTION
+// ==========================================
+
+function openInvitation() {
+    document.getElementById('cover').classList.add('hidden');
+    document.getElementById('main-content').classList.remove('hidden');
+    
+    setTimeout(() => {
+        document.getElementById('main-content').classList.add('visible');
+    }, 100);
+    
+    // Show navigation
+    setTimeout(() => {
+        if (window.showNavigation) {
+            window.showNavigation();
+        }
+    }, 500);
+    
+    // Auto play music
+    const music = document.getElementById('bg-music');
+    if (WEDDING_CONFIG.music.autoplay) {
+        music.play().catch(e => console.log('Autoplay prevented'));
+        document.getElementById('music-toggle').classList.add('playing');
+    }
+}
+
+// ==========================================
+// UPDATE DOMContentLoaded
+// ==========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Hide loading screen
+    setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+    }, 1500);
+
+    // Initialize everything
+    loadConfig();
+    initCountdown();
+    initMusic();
+    initGallery();
+    initGifts();
+    initRSVP();
+    initWatermark();
+    initNavigation(); // Tambah ini
+});
+
+
+// ==========================================
 // LOAD CONFIGURATION
 // ==========================================
 
